@@ -1,0 +1,172 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Marc Evangelista - Terminal Enthusiast</title>
+		<meta name="description" content="AI engineer who ships weird things that actually work. Terminal enthusiast building tools with Claude, LLMs, and a healthy dose of ADHD." />
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+		
+		<style>
+			:root {
+				--bg: #000000;
+				--text: #00ff00;
+				--accent: #ffa500;
+				--dim: #008800;
+			}
+
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background: var(--bg);
+				color: var(--text);
+				font-family: 'Fira Code', monospace;
+				padding: 2rem;
+				line-height: 1.6;
+				min-height: 100vh;
+			}
+
+			.container {
+				max-width: 80ch;
+				margin: 0 auto;
+			}
+
+			h1 {
+				font-size: 1.2rem;
+				margin-bottom: 0.5rem;
+				font-weight: 400;
+			}
+
+			.tagline {
+				color: var(--dim);
+				margin-bottom: 2rem;
+			}
+
+			.tagline::before {
+				content: '> ';
+			}
+
+			section {
+				margin-bottom: 2rem;
+			}
+
+			h2 {
+				font-size: 1rem;
+				margin-bottom: 0.5rem;
+				font-weight: 600;
+			}
+
+			ul {
+				list-style: none;
+				padding-left: 0;
+			}
+
+			li {
+				margin-bottom: 0.5rem;
+			}
+
+			li::before {
+				content: '• ';
+				color: var(--dim);
+			}
+
+			.one-liner {
+				margin: 2rem 0;
+				font-style: italic;
+			}
+
+			.contact {
+				margin-top: 3rem;
+			}
+
+			a {
+				color: var(--accent);
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-shadow: 0 0 5px var(--accent);
+			}
+
+			.links {
+				margin-top: 2rem;
+			}
+
+			.links a {
+				margin-right: 1rem;
+				display: inline-block;
+			}
+
+			.cursor::after {
+				content: '_';
+				animation: blink 1s infinite;
+			}
+
+			@keyframes blink {
+				0%, 50% { opacity: 1; }
+				51%, 100% { opacity: 0; }
+			}
+
+			/* Mobile adjustments */
+			@media (max-width: 600px) {
+				body {
+					padding: 1rem;
+				}
+				
+				.links a {
+					display: block;
+					margin-bottom: 0.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>Marc Evangelista</h1>
+			<div class="tagline">Terminal enthusiast who ships AI-powered tools</div>
+			
+			<section>
+				<h2>Current projects:</h2>
+				<ul>
+					<li>Lilaya - Game where daily thoughts/urges/tasks build virtual kingdoms</li>
+					<li>Music Practice Tracker - Visualizes practice patterns, finds what works</li>
+					<li>Claude Workflows - Custom agents for code generation and doc processing</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Previous work:</h2>
+				<ul>
+					<li>Bloomberg - Made C++ database builds 60x faster (10+ hrs/day saved)</li>
+					<li>Toki - Built Ethereum loyalty rewards for Shopify stores</li>
+				</ul>
+			</section>
+
+			<p class="one-liner">I ship weird things that actually work. ADHD is my superpower<span class="cursor"></span></p>
+
+			<div class="contact">
+				<a href="mailto:marc@evangelista.moe">marc@evangelista.moe</a><br>
+				<a href="https://github.com/cybermelon">github.com/cybermelon</a>
+			</div>
+
+			<div class="links">
+				<a href="https://github.com/cybermelon">[GitHub]</a>
+				<a href="https://linkedin.com/in/marcevangelista">[LinkedIn]</a>
+				<a href="/resume.pdf">[Resume PDF]</a>
+			</div>
+		</div>
+	</body>
+</html>
