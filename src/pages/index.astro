@@ -73,6 +73,32 @@
 				margin: 10px 0;
 			}
 			
+			/* Sticky note styles */
+			.sticky-note {
+				position: relative;
+				padding: 1em;
+				width: 100%;
+				min-height: 200px;
+				background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.25));
+				background-color: #FFFD75;
+				box-shadow: 5px 5px 10px -2px rgba(33,33,33,.3);
+				transform: rotate(-2deg);
+				transform: skew(-1deg,1deg);
+				transition: transform .15s;
+				margin-top: 20px;
+			}
+			
+			.sticky-note:hover {
+				transform: rotate(-1deg) skew(-0.5deg, 0.5deg);
+			}
+			
+			.sticky-note p {
+				font-family: 'Comic Sans MS', 'Gloria Hallelujah', cursive;
+				font-size: 14pt;
+				color: #333;
+				margin: 5px 0;
+			}
+			
 			/* Responsive - keep Windows aesthetic */
 			@media (max-width: 768px) {
 				body {
@@ -131,6 +157,16 @@
 				/* Fix sticky note width */
 				.window-body p {
 					word-wrap: break-word;
+				}
+				
+				/* Sticky note adjustments for mobile */
+				.sticky-note {
+					transform: rotate(-1deg) skew(-0.5deg, 0.5deg);
+					margin-top: 15px;
+				}
+				
+				.sticky-note p {
+					font-size: 12pt;
 				}
 			}
 		</style>
@@ -357,16 +393,11 @@
 					</div>
 					
 					<!-- To-do sticky note -->
-					<div class="window" style="margin-top: 20px;">
-						<div class="title-bar">
-							<div class="title-bar-text">Sticky Note</div>
-						</div>
-						<div class="window-body" style="background: #ffff88; font-family: 'Comic Sans MS', cursive;">
-							<p style="margin: 0;">TO-DO:</p>
-							<p style="margin: 5px 0;">☐ Make more things 60x faster</p>
-							<p style="margin: 5px 0;">☐ Teach AI to make coffee</p>
-							<p style="margin: 5px 0;">☐ humor lower human guard</p>
-						</div>
+					<div class="sticky-note">
+						<p style="margin: 0; font-weight: bold;">TO-DO:</p>
+						<p>☐ Make more things 60x faster</p>
+						<p>☐ Teach AI to make coffee</p>
+						<p>☐ humor lower human guard</p>
 					</div>
 				</aside>
 			</div>
