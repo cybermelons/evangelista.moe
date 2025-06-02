@@ -1,3 +1,4 @@
+- add "to-do desktop sticky: humor lower human guard."
 # Working Plan - evangelista.moe
 
 ## Project Overview
@@ -167,3 +168,53 @@ a:hover {
 
 ---
 Last Updated: 2025-01-30
+
+## Major Design Revision - 2025-01-30
+
+### Changes Implemented
+
+#### Phase 1: Windows 98/XP Theme Implementation
+- [x] Switched from terminal aesthetic to Windows 98/XP CSS libraries
+- [x] Created theme switcher between 98 and XP styles
+- [x] Added Windows UI components (windows, tabs, buttons, status bar)
+
+#### Phase 2: Graphic Design Analysis
+- [x] Created graphic design agent using prompt engineering patterns
+- [x] Conducted thorough site analysis identifying key issues:
+  - Theme switcher dominated over actual content
+  - 60x achievement was buried in tabs
+  - No clear visual hierarchy
+  - Mobile experience broken
+
+#### Phase 3: Major Redesign Based on Analysis
+- [x] Added hero section with "60x faster" as primary hook
+- [x] Minimized theme toggle to corner (content > gimmicks)
+- [x] Flattened information architecture - key info visible immediately
+- [x] Created achievement cards with visual metrics
+- [x] Added clear CTA buttons after proof points
+- [x] Implemented terminal mode for mobile (responsive design)
+- [x] Added developer touches:
+  - Console message for recruiters who check
+  - Konami code easter egg
+  - Keyboard navigation (Alt+1/2/3)
+  - Page load performance tracking
+
+### Current State
+The site now:
+1. **Leads with differentiation** - "60x faster" is unmissable
+2. **Shows personality subtly** - Windows theme supports, doesn't dominate
+3. **Works on mobile** - Terminal aesthetic preserves identity
+4. **Includes "real human" signals** - Developer console messages, keyboard shortcuts
+5. **Clear hiring path** - Hook → Proof → Projects → Contact
+
+### Design Philosophy Applied
+- **Results-first architecture** - 60x claim before anything else
+- **Nostalgic function, modern performance** - Windows UI with purpose
+- **Personality through interaction** - Hidden touches for those who explore
+
+### Next Steps
+- [ ] Test on multiple devices
+- [ ] Optimize performance (lazy load XP.css)
+- [ ] Add meta tags for social sharing
+- [ ] Deploy to production
+- [ ] Add "to-do desktop sticky: humor lower human guard" (per note)

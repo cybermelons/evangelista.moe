@@ -1,33 +1,49 @@
-# Astro Starter Kit: Minimal
+# evangelista.moe
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Personal portfolio site with Windows 98/XP aesthetic. Real human engineer who makes computers do work.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Design Philosophy
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**THE WINDOWS AESTHETIC IS THE POINT.** The theme switcher between Windows 98 and XP is a core feature, not a gimmick. This site is meant to:
 
-## 🚀 Project Structure
+1. Show I'm a real programmer who grew up with actual computers
+2. Stand out from generic developer portfolios
+3. Work perfectly on mobile WITH the Windows UI (windows stack vertically)
+4. Be fun and memorable
 
-Inside of your Astro project, you'll see the following folders and files:
+## Key Features
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Theme Switcher**: Toggle between Windows 98 and XP styles
+- **Multiple Windows**: Each section in its own window (Display Properties, Main Content, Quick Info, Sticky Note)
+- **Interactive Elements**: 
+  - Clickable table rows with alerts
+  - Productivity mode toggle (Hyperfocus vs Squirrel!)
+  - Tree view for projects
+  - Progress bar showing 60x optimization
+- **Easter Eggs**:
+  - Console message for developers
+  - Konami code achievement
+  - Alt+1/2/3/4 keyboard navigation for tabs
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Content Strategy
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Lead with personality: "AI engineer. make computer do work."
+- Show concrete achievement: 60x faster C++ builds at Bloomberg
+- Keep it human: ADHD as superpower, "real 90s baby"
+- Humor touches: Sticky note with "humor lower human guard"
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Technical Stack
+
+- Astro (static site generation)
+- 98.css and XP.css libraries
+- Vanilla JavaScript for interactivity
+- No build complexity, just ship
+
+## Important Note
+
+**DO NOT** remove the Windows aesthetic or "simplify" to a minimal design. The whole point is the nostalgic, fully-functional Windows UI that works everywhere. If someone suggests making it "cleaner" or "more modern" - they don't get it.
+
+The site should feel like you're browsing someone's Windows desktop from 2001, because that's when real programmers were made.
 
 ## 🧞 Commands
 
@@ -42,6 +58,18 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
+## Local Development
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+cd evangelista.moe
+pnpm install
+pnpm dev
+```
+
+## Deployment
+
+Site deploys to evangelista.moe via [deployment service].
+
+---
+
+Remember: This is a 3-hour project that shows more personality than a 3-week "professional" portfolio. Ship weird things that actually work.
