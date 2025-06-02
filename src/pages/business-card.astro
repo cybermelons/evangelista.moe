@@ -12,6 +12,9 @@
 		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
+		<!-- QR Code library -->
+		<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+		
 		<style>
 			@page {
 				size: 3.5in 2in;
@@ -33,33 +36,23 @@
 				width: 3.5in;
 				height: 2in;
 				position: relative;
-				overflow: visible;
-				padding: 2px;
+				background: white;
+				page-break-after: always;
 			}
 			
 			.window {
-				width: calc(100% - 4px);
-				height: calc(100% - 4px);
+				width: 100%;
+				height: 100%;
 				margin: 0;
 				display: flex;
 				flex-direction: column;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
-			.title-bar {
-				flex-shrink: 0;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
-			}
-			
+			/* Only override fonts for title bar and headings */
 			.title-bar-text {
-				font-size: 11px;
 				font-family: 'Tahoma', 'Arial', sans-serif !important;
-			}
-			
-			.title-bar-controls button {
-				min-width: 16px;
-				min-height: 14px;
-				padding: 0;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
 			}
 			
 			.window-body {
@@ -69,25 +62,20 @@
 				flex-direction: column;
 				justify-content: space-between;
 				font-size: 10px;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
 			.content-top {
 				flex-grow: 1;
 			}
 			
+			/* Use Arial for headings only */
 			.name {
 				font-size: 14pt;
 				font-weight: bold;
 				margin-bottom: 4px;
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
-			}
-			
-			.tagline {
-				font-size: 8pt;
-				color: #666;
-				margin-bottom: 8px;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
 			}
 			
 			.achievement {
@@ -96,18 +84,25 @@
 				color: #0066cc;
 				margin-bottom: 2px;
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			/* Small text keeps default pixelated font */
+			.tagline {
+				font-size: 8pt;
+				color: #666;
+				margin-bottom: 8px;
 			}
 			
 			.achievement-detail {
 				font-size: 8pt;
 				margin-bottom: 6px;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
 			.skills {
 				font-size: 7pt;
 				margin-bottom: 6px;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
 			.contact {
@@ -116,7 +111,6 @@
 				font-size: 8pt;
 				border-top: 1px solid #ccc;
 				padding-top: 6px;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
 			/* Sticky note accent */
@@ -135,26 +129,28 @@
 				z-index: 10;
 			}
 			
-			/* Adjust for XP theme */
-			.winxp .window {
-				border-radius: 6px 6px 0 0;
+			/* Back side with QR code */
+			.card-back {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
 			}
 			
-			.winxp .title-bar {
-				border-radius: 6px 6px 0 0;
+			.qr-container {
+				text-align: center;
 			}
 			
-			/* Override 98.css pixelated fonts */
-			.window,
-			.window * {
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
+			.qr-container canvas {
+				max-width: 120px;
+				max-height: 120px;
 			}
 			
-			/* Force non-pixelated fonts */
-			body, .window, .title-bar, .window-body {
-				image-rendering: auto !important;
+			.qr-label {
+				margin-top: 10px;
+				font-size: 10pt;
+				font-family: 'Arial', 'Tahoma', sans-serif !important;
 			}
 			
 			/* Print styles */
@@ -165,9 +161,8 @@
 					background: white;
 				}
 				
-				.card-container {
-					page-break-after: always;
-					overflow: hidden;
+				.theme-controls {
+					display: none !important;
 				}
 			}
 			
@@ -177,13 +172,14 @@
 					background: #008080;
 					padding: 20px;
 					display: flex;
+					flex-direction: column;
 					justify-content: center;
 					align-items: center;
 					min-height: 100vh;
+					gap: 20px;
 				}
 				
 				.card-container {
-					background: white;
 					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 				}
 			}
@@ -198,12 +194,6 @@
 				border: 2px solid #000;
 				z-index: 100;
 			}
-			
-			@media print {
-				.theme-controls {
-					display: none;
-				}
-			}
 		</style>
 	</head>
 	<body>
@@ -217,6 +207,7 @@
 			</label>
 		</div>
 		
+		<!-- Front of card -->
 		<div class="card-container">
 			<div class="window">
 				<div class="title-bar">
@@ -256,23 +247,55 @@
 			</div>
 		</div>
 		
+		<!-- Back of card -->
+		<div class="card-container">
+			<div class="window">
+				<div class="title-bar">
+					<div class="title-bar-text">evangelista.moe</div>
+					<div class="title-bar-controls">
+						<button aria-label="Minimize"></button>
+						<button aria-label="Maximize"></button>
+						<button aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="window-body">
+					<div class="card-back">
+						<div class="qr-container">
+							<canvas id="qrcode"></canvas>
+							<div class="qr-label">evangelista.moe</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<script>
+			// Generate QR code
+			window.addEventListener('load', () => {
+				const canvas = document.getElementById('qrcode');
+				QRCode.toCanvas(canvas, 'https://evangelista.moe', {
+					width: 120,
+					margin: 1,
+					color: {
+						dark: '#000000',
+						light: '#FFFFFF'
+					}
+				});
+			});
+			
 			// Theme switcher for preview
 			const themeInputs = document.querySelectorAll('input[name="theme"]');
 			const win98CSS = document.getElementById('win98-css');
 			const winxpCSS = document.getElementById('winxp-css');
-			const container = document.querySelector('.card-container');
 			
 			themeInputs.forEach(input => {
 				input.addEventListener('change', (e) => {
 					if (e.target.value === '98') {
 						win98CSS.disabled = false;
 						winxpCSS.disabled = true;
-						container.classList.remove('winxp');
 					} else {
 						win98CSS.disabled = true;
 						winxpCSS.disabled = false;
-						container.classList.add('winxp');
 					}
 				});
 			});

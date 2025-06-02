@@ -20,27 +20,21 @@
 				margin: 0;
 				padding: 20px;
 				min-height: 100vh;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
-			/* Override pixelated fonts from 98.css */
-			.window,
-			.window * {
+			/* Use Arial/Tahoma only for title bars and large headings */
+			.title-bar-text {
+				font-family: 'Tahoma', 'Arial', sans-serif !important;
 				font-smooth: always;
 				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
 			}
 			
 			/* Use Arial for larger headings */
 			h1, h2, h3, h4, h5, h6,
 			.hero-metric {
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
-			}
-			
-			/* Force non-pixelated rendering */
-			body, .window, .title-bar, .window-body {
-				image-rendering: auto !important;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
 			}
 			
 			.container {
@@ -210,10 +204,10 @@
 						<div class="window-body">
 							<!-- COMPONENT OPPORTUNITY: Tabs -->
 							<menu role="tablist">
-								<button role="tab" aria-selected="true">General</button>
-								<button role="tab">Projects</button>
-								<button role="tab">Experience</button>
-								<button role="tab">System</button>
+								<li role="tab" aria-selected="true"><a href="#general">General</a></li>
+								<li role="tab"><a href="#projects">Projects</a></li>
+								<li role="tab"><a href="#experience">Experience</a></li>
+								<li role="tab"><a href="#system">System</a></li>
 							</menu>
 							
 							<!-- General Tab -->
@@ -479,7 +473,9 @@
 			const panels = document.querySelectorAll('[role="tabpanel"]');
 			
 			tabs.forEach((tab, index) => {
-				tab.addEventListener('click', () => {
+				const link = tab.querySelector('a');
+				link.addEventListener('click', (e) => {
+					e.preventDefault();
 					tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
 					panels.forEach(p => p.hidden = true);
 					
@@ -524,16 +520,16 @@ P.S. Try the Konami code 😉
 				if (e.altKey) {
 					switch(e.key) {
 						case '1':
-							tabs[0].click();
+							tabs[0].querySelector('a').click();
 							break;
 						case '2':
-							tabs[1].click();
+							tabs[1].querySelector('a').click();
 							break;
 						case '3':
-							tabs[2].click();
+							tabs[2].querySelector('a').click();
 							break;
 						case '4':
-							tabs[3].click();
+							tabs[3].querySelector('a').click();
 							break;
 					}
 				}
