@@ -20,6 +20,27 @@
 				margin: 0;
 				padding: 20px;
 				min-height: 100vh;
+				font-family: 'Tahoma', 'Arial', sans-serif !important;
+			}
+			
+			/* Override pixelated fonts from 98.css */
+			.window,
+			.window * {
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				font-family: 'Tahoma', 'Arial', sans-serif !important;
+			}
+			
+			/* Use Arial for larger headings */
+			h1, h2, h3, h4, h5, h6,
+			.hero-metric {
+				font-family: 'Arial', 'Tahoma', sans-serif !important;
+			}
+			
+			/* Force non-pixelated rendering */
+			body, .window, .title-bar, .window-body {
+				image-rendering: auto !important;
 			}
 			
 			.container {
