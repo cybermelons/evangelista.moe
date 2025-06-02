@@ -8,6 +8,10 @@
 		<meta name="viewport" content="width=device-width" />
 		<title>Marc Evangelista - Business Card</title>
 		
+		<!-- Windows CSS libraries -->
+		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
+		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
+		
 		<style>
 			@page {
 				size: 3.5in 2in;
@@ -23,104 +27,110 @@
 			body {
 				margin: 0;
 				padding: 0;
-				font-family: 'Courier New', monospace;
 			}
 			
-			.card {
+			.card-container {
 				width: 3.5in;
 				height: 2in;
-				padding: 0.15in;
-				background: white;
 				position: relative;
 				overflow: hidden;
+			}
+			
+			.window {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.title-bar {
+				flex-shrink: 0;
+			}
+			
+			.title-bar-text {
+				font-size: 11px;
+			}
+			
+			.title-bar-controls button {
+				min-width: 16px;
+				min-height: 14px;
+				padding: 0;
+			}
+			
+			.window-body {
+				flex-grow: 1;
+				padding: 8px;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
+				font-size: 10px;
 			}
 			
-			/* Windows 98 border effect */
-			.card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				border: 2px solid;
-				border-color: #dfdfdf #000 #000 #dfdfdf;
-				pointer-events: none;
-			}
-			
-			.header {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				margin-bottom: 8px;
+			.content-top {
+				flex-grow: 1;
 			}
 			
 			.name {
-				font-size: 16pt;
+				font-size: 14pt;
 				font-weight: bold;
-				color: #000;
+				margin-bottom: 4px;
 			}
 			
 			.tagline {
 				font-size: 8pt;
 				color: #666;
-				margin-bottom: 10px;
-			}
-			
-			.content {
-				flex-grow: 1;
+				margin-bottom: 8px;
 			}
 			
 			.achievement {
-				font-size: 18pt;
+				font-size: 16pt;
 				font-weight: bold;
 				color: #0066cc;
-				margin-bottom: 5px;
+				margin-bottom: 2px;
 			}
 			
 			.achievement-detail {
-				font-size: 7pt;
-				color: #333;
-				margin-bottom: 10px;
+				font-size: 8pt;
+				margin-bottom: 6px;
 			}
 			
 			.skills {
 				font-size: 7pt;
-				color: #333;
-				margin-bottom: 10px;
+				margin-bottom: 6px;
 			}
 			
 			.contact {
 				display: flex;
 				justify-content: space-between;
 				font-size: 8pt;
-				color: #000;
 				border-top: 1px solid #ccc;
-				padding-top: 8px;
-			}
-			
-			.contact a {
-				color: #0066cc;
-				text-decoration: none;
+				padding-top: 6px;
 			}
 			
 			/* Sticky note accent */
 			.sticky-accent {
 				position: absolute;
-				top: 10px;
-				right: 10px;
-				width: 60px;
-				height: 60px;
+				top: 30px;
+				right: 8px;
+				width: 50px;
+				height: 50px;
 				background: #FFFD75;
 				transform: rotate(-5deg);
-				box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-				padding: 8px;
+				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+				padding: 6px;
 				font-size: 6pt;
 				font-family: 'Comic Sans MS', cursive;
-				z-index: 1;
+				z-index: 10;
+			}
+			
+			/* Adjust for XP theme */
+			.winxp .window {
+				border-radius: 6px 6px 0 0;
+			}
+			
+			.winxp .title-bar {
+				border-radius: 6px 6px 0 0;
 			}
 			
 			/* Print styles */
@@ -128,9 +138,10 @@
 				body {
 					margin: 0;
 					padding: 0;
+					background: white;
 				}
 				
-				.card {
+				.card-container {
 					page-break-after: always;
 				}
 			}
@@ -138,7 +149,7 @@
 			/* Screen preview styles */
 			@media screen {
 				body {
-					background: #eee;
+					background: #008080;
 					padding: 20px;
 					display: flex;
 					justify-content: center;
@@ -146,41 +157,100 @@
 					min-height: 100vh;
 				}
 				
-				.card {
-					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				.card-container {
+					background: white;
+					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+				}
+			}
+			
+			/* Theme switcher for preview */
+			.theme-controls {
+				position: fixed;
+				top: 10px;
+				right: 10px;
+				background: white;
+				padding: 10px;
+				border: 2px solid #000;
+				z-index: 100;
+			}
+			
+			@media print {
+				.theme-controls {
+					display: none;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<div class="card">
-			<div class="sticky-accent">
-				TODO:<br>
-				☐ 60x<br>
-				☐ AI<br>
-				☐ humor
-			</div>
-			
-			<div class="header">
-				<div class="name">Marc Evangelista</div>
-			</div>
-			
-			<div class="tagline">AI engineer. make computer do work.</div>
-			
-			<div class="content">
-				<div class="achievement">60x faster</div>
-				<div class="achievement-detail">C++ builds at Bloomberg</div>
-				
-				<div class="skills">
-					Bleeding edge AI agentic workflows • Prompt engineering<br>
-					Real 90s baby who grew up with Windows
+		<!-- Theme controls for preview only -->
+		<div class="theme-controls">
+			<label>
+				<input type="radio" name="theme" value="98" checked> Win98
+			</label>
+			<label>
+				<input type="radio" name="theme" value="xp"> WinXP
+			</label>
+		</div>
+		
+		<div class="card-container">
+			<div class="window">
+				<div class="title-bar">
+					<div class="title-bar-text">Marc Evangelista - real human engineer</div>
+					<div class="title-bar-controls">
+						<button aria-label="Minimize"></button>
+						<button aria-label="Maximize"></button>
+						<button aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="window-body">
+					<div class="sticky-accent">
+						TODO:<br>
+						☐ 60x<br>
+						☐ AI<br>
+						☐ humor
+					</div>
+					
+					<div class="content-top">
+						<div class="name">Marc Evangelista</div>
+						<div class="tagline">AI engineer. make computer do work.</div>
+						
+						<div class="achievement">60x faster</div>
+						<div class="achievement-detail">C++ builds at Bloomberg</div>
+						
+						<div class="skills">
+							Bleeding edge AI agentic workflows • Prompt engineering<br>
+							Real 90s baby who grew up with Windows
+						</div>
+					</div>
+					
+					<div class="contact">
+						<span>marc@evangelista.moe</span>
+						<span>github.com/cybermelons</span>
+					</div>
 				</div>
 			</div>
-			
-			<div class="contact">
-				<span>marc@evangelista.moe</span>
-				<span>github.com/cybermelons</span>
-			</div>
 		</div>
+		
+		<script>
+			// Theme switcher for preview
+			const themeInputs = document.querySelectorAll('input[name="theme"]');
+			const win98CSS = document.getElementById('win98-css');
+			const winxpCSS = document.getElementById('winxp-css');
+			const container = document.querySelector('.card-container');
+			
+			themeInputs.forEach(input => {
+				input.addEventListener('change', (e) => {
+					if (e.target.value === '98') {
+						win98CSS.disabled = false;
+						winxpCSS.disabled = true;
+						container.classList.remove('winxp');
+					} else {
+						win98CSS.disabled = true;
+						winxpCSS.disabled = false;
+						container.classList.add('winxp');
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
