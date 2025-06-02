@@ -1,0 +1,186 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Marc Evangelista - Business Card</title>
+		
+		<style>
+			@page {
+				size: 3.5in 2in;
+				margin: 0;
+			}
+			
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: 'Courier New', monospace;
+			}
+			
+			.card {
+				width: 3.5in;
+				height: 2in;
+				padding: 0.15in;
+				background: white;
+				position: relative;
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			
+			/* Windows 98 border effect */
+			.card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				border: 2px solid;
+				border-color: #dfdfdf #000 #000 #dfdfdf;
+				pointer-events: none;
+			}
+			
+			.header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 8px;
+			}
+			
+			.name {
+				font-size: 16pt;
+				font-weight: bold;
+				color: #000;
+			}
+			
+			.tagline {
+				font-size: 8pt;
+				color: #666;
+				margin-bottom: 10px;
+			}
+			
+			.content {
+				flex-grow: 1;
+			}
+			
+			.achievement {
+				font-size: 18pt;
+				font-weight: bold;
+				color: #0066cc;
+				margin-bottom: 5px;
+			}
+			
+			.achievement-detail {
+				font-size: 7pt;
+				color: #333;
+				margin-bottom: 10px;
+			}
+			
+			.skills {
+				font-size: 7pt;
+				color: #333;
+				margin-bottom: 10px;
+			}
+			
+			.contact {
+				display: flex;
+				justify-content: space-between;
+				font-size: 8pt;
+				color: #000;
+				border-top: 1px solid #ccc;
+				padding-top: 8px;
+			}
+			
+			.contact a {
+				color: #0066cc;
+				text-decoration: none;
+			}
+			
+			/* Sticky note accent */
+			.sticky-accent {
+				position: absolute;
+				top: 10px;
+				right: 10px;
+				width: 60px;
+				height: 60px;
+				background: #FFFD75;
+				transform: rotate(-5deg);
+				box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+				padding: 8px;
+				font-size: 6pt;
+				font-family: 'Comic Sans MS', cursive;
+				z-index: 1;
+			}
+			
+			/* Print styles */
+			@media print {
+				body {
+					margin: 0;
+					padding: 0;
+				}
+				
+				.card {
+					page-break-after: always;
+				}
+			}
+			
+			/* Screen preview styles */
+			@media screen {
+				body {
+					background: #eee;
+					padding: 20px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					min-height: 100vh;
+				}
+				
+				.card {
+					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="card">
+			<div class="sticky-accent">
+				TODO:<br>
+				☐ 60x<br>
+				☐ AI<br>
+				☐ humor
+			</div>
+			
+			<div class="header">
+				<div class="name">Marc Evangelista</div>
+			</div>
+			
+			<div class="tagline">AI engineer. make computer do work.</div>
+			
+			<div class="content">
+				<div class="achievement">60x faster</div>
+				<div class="achievement-detail">C++ builds at Bloomberg</div>
+				
+				<div class="skills">
+					Bleeding edge AI agentic workflows • Prompt engineering<br>
+					Real 90s baby who grew up with Windows
+				</div>
+			</div>
+			
+			<div class="contact">
+				<span>marc@evangelista.moe</span>
+				<span>github.com/cybermelons</span>
+			</div>
+		</div>
+	</body>
+</html>
