@@ -12,8 +12,6 @@
 		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
-		<!-- QR Code library -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 		
 		<style>
 			@page {
@@ -147,13 +145,9 @@
 				text-align: center;
 			}
 			
-			#qrcode {
-				display: inline-block;
-			}
-			
-			#qrcode img {
-				max-width: 120px;
-				max-height: 120px;
+			.qr-container img {
+				width: 120px;
+				height: 120px;
 			}
 			
 			.qr-label {
@@ -270,7 +264,7 @@
 				<div class="window-body">
 					<div class="card-back">
 						<div class="qr-container">
-							<div id="qrcode"></div>
+							<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://evangelista.moe" alt="QR Code" />
 							<div class="qr-label">evangelista.moe</div>
 						</div>
 					</div>
@@ -279,21 +273,6 @@
 		</div>
 		
 		<script>
-			// Generate QR code
-			window.addEventListener('DOMContentLoaded', () => {
-				const qrElement = document.getElementById('qrcode');
-				if (qrElement && typeof QRCode !== 'undefined') {
-					new QRCode(qrElement, {
-						text: 'https://evangelista.moe',
-						width: 120,
-						height: 120,
-						colorDark: '#000000',
-						colorLight: '#FFFFFF',
-						correctLevel: QRCode.CorrectLevel.H
-					});
-				}
-			});
-			
 			// Theme switcher for preview
 			const themeInputs = document.querySelectorAll('input[name="theme"]');
 			const win98CSS = document.getElementById('win98-css');
@@ -313,3 +292,4 @@
 		</script>
 	</body>
 </html>
+
