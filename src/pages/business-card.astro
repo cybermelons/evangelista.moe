@@ -60,7 +60,7 @@
 			
 			.window-body {
 				flex-grow: 1;
-				padding: 8px;
+				padding: 10px;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -82,10 +82,10 @@
 			}
 			
 			.achievement {
-				font-size: 16pt;
+				font-size: 15pt;
 				font-weight: bold;
-				color: #0066cc;
-				margin-bottom: 2px;
+				color: #0052cc; /* Stronger blue for AI event impact */
+				margin-bottom: 4px;
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
 				font-smooth: always;
 				-webkit-font-smoothing: antialiased;
@@ -116,18 +116,18 @@
 				padding-top: 6px;
 			}
 			
-			/* Sticky note accent */
+			/* Sticky note accent - smaller and repositioned */
 			.sticky-accent {
 				position: absolute;
-				top: 30px;
-				right: 8px;
-				width: 50px;
-				height: 50px;
+				top: 5px;
+				right: 5px;
+				width: 45px;
+				height: 45px;
 				background: #FFFD75;
 				transform: rotate(-5deg);
 				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-				padding: 6px;
-				font-size: 6pt;
+				padding: 4px;
+				font-size: 5pt;
 				font-family: 'Comic Sans MS', cursive;
 				z-index: 10;
 			}
@@ -208,6 +208,9 @@
 			<label>
 				<input type="radio" name="theme" value="xp"> WinXP
 			</label>
+			<div style="margin-top: 10px;">
+				<button onclick="window.location.href='/'">← Back to Site</button>
+			</div>
 		</div>
 		
 		<!-- Front of card -->
@@ -223,22 +226,21 @@
 				</div>
 				<div class="window-body">
 					<div class="sticky-accent">
-						TODO:<br>
-						☐ 60x<br>
-						☐ AI<br>
-						☐ humor
+						AI<br>
+						AGENT<br>
+						EXPERT
 					</div>
 					
 					<div class="content-top">
 						<div class="name">Marc Evangelista</div>
-						<div class="tagline">AI engineer. make computer do work.</div>
+						<div class="tagline">me make computer do work.</div>
 						
-						<div class="achievement">60x faster</div>
-						<div class="achievement-detail">C++ builds at Bloomberg</div>
+						<div class="achievement">60x faster with Claude AI</div>
+						<div class="achievement-detail">Bleeding edge agentic engineering</div>
 						
 						<div class="skills">
-							Bleeding edge AI agentic workflows • Prompt engineering<br>
-							Real 90s baby who grew up with Windows
+							Claude Code • Prompt Engineering • LLM Integration<br>
+							Bloomberg (60x speedup) • SharpTax • Ethereum
 						</div>
 					</div>
 					
@@ -264,7 +266,7 @@
 				<div class="window-body">
 					<div class="card-back">
 						<div class="qr-container">
-							<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://evangelista.moe" alt="QR Code" />
+							<img src="/site_qrcode.png" alt="QR Code" />
 							<div class="qr-label">evangelista.moe</div>
 						</div>
 					</div>

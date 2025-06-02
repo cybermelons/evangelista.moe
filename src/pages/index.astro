@@ -81,12 +81,123 @@
 				background: #f0f0f0;
 			}
 			
-			/* Make the 60x story more prominent */
+			/* Tone down the 60x metric */
 			.hero-metric {
-				font-size: 2em;
+				font-size: 1.5em;
 				font-weight: bold;
 				color: #0066cc;
 				margin: 10px 0;
+			}
+			
+			/* Fix Connect window padding for XP */
+			.connect-links {
+				padding-top: 10px;
+			}
+			
+			/* Win98-style hyperlinks */
+			.connect-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 8px;
+				padding: 10px;
+			}
+			
+			.connect-grid a {
+				display: inline-flex;
+				align-items: center;
+				color: #0000EE;
+				text-decoration: underline;
+				cursor: pointer;
+				padding: 4px;
+			}
+			
+			.connect-grid a:visited {
+				color: #551A8B;
+			}
+			
+			.connect-grid a:hover {
+				color: #0000EE;
+				background: transparent;
+			}
+			
+			.connect-grid a:active {
+				color: #FF0000;
+			}
+			
+			/* Fixed size Properties window with scrolling */
+			.properties-window {
+				width: 600px;
+				height: 450px;
+			}
+			
+			.properties-window .window-body {
+				height: calc(100% - 30px);
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.properties-window article[role="tabpanel"] {
+				flex: 1;
+				overflow-y: auto;
+				overflow-x: hidden;
+				padding-right: 10px;
+			}
+			
+			/* Core Skills Grid Design - Win98 Style */
+			.skills-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 8px;
+				margin-top: 15px;
+			}
+			
+			.skill-card {
+				background: #c0c0c0;
+				border: 2px solid;
+				border-color: #ffffff #808080 #808080 #ffffff;
+				padding: 8px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			
+			.skill-card:active {
+				border-color: #808080 #ffffff #ffffff #808080;
+			}
+			
+			.skill-icon {
+				width: 32px;
+				height: 32px;
+				flex-shrink: 0;
+			}
+			
+			.skill-content {
+				text-align: left;
+				flex-grow: 1;
+			}
+			
+			.skill-title {
+				font-weight: bold;
+				font-size: 11px;
+				margin-bottom: 2px;
+			}
+			
+			.skill-desc {
+				font-size: 10px;
+				color: #000;
+			}
+			
+			/* XP theme overrides for skills */
+			body:has(#winxp:checked) .skill-card {
+				background: #ece9d8;
+				border-radius: 3px;
+				border: 1px solid #003c74;
+				box-shadow: inset 0 1px 0 #ffffff;
+			}
+			
+			body:has(#winxp:checked) .skill-card:hover {
+				background: #e4f3ff;
+				border-color: #0078d7;
 			}
 			
 			/* Sticky note styles */
@@ -184,6 +295,12 @@
 				.sticky-note p {
 					font-size: 12pt;
 				}
+				
+				/* Skills grid on mobile - single column */
+				.skills-grid {
+					grid-template-columns: 1fr;
+				}
+				
 			}
 		</style>
 	</head>
@@ -193,7 +310,7 @@
 				<!-- Main Content Area -->
 				<main>
 					<!-- About Window with Tabs -->
-					<div class="window">
+					<div class="window properties-window">
 						<div class="title-bar">
 							<div class="title-bar-text">Marc Evangelista - Properties</div>
 							<div class="title-bar-controls">
@@ -213,8 +330,8 @@
 							
 							<!-- General Tab -->
 							<article role="tabpanel">
-								<h2>AI engineer. make computer do work.</h2>
-								<p>real 90s baby who grew up with Windows. now I build things with bleeding edge AI agentic workflows.</p>
+								<h2>me make computer do work.</h2>
+								<p>I use bleeding edge Claude agentic workflows to make codebases build themselves.</p>
 								
 								<!-- Make the 60x achievement prominent -->
 								<div class="performance-metric">
@@ -225,16 +342,40 @@
 										</div>
 								</div>
 								
-								<!-- COMPONENT OPPORTUNITY: Details/Summary -->
-								<details open>
-									<summary>Core Skills</summary>
-									<ul>
-										<li>Agentic AI workflows</li>
-										<li>Prompt engineering</li>
-										<li>60x performance optimization</li>
-										<li>ADHD-powered hyperfocus</li>
-									</ul>
-								</details>
+								<!-- Core Skills Grid -->
+								<fieldset style="margin-top: 20px;">
+									<legend>Core Skills</legend>
+									<div class="skills-grid">
+										<div class="skill-card">
+											<img src="https://win98icons.alexmeub.com/icons/png/msagent-1.png" alt="AI Agent" class="skill-icon" />
+											<div class="skill-content">
+												<div class="skill-title">Claude AI</div>
+												<div class="skill-desc">Agentic workflows</div>
+											</div>
+										</div>
+										<div class="skill-card">
+											<img src="https://win98icons.alexmeub.com/icons/png/console_prompt-0.png" alt="Command Prompt" class="skill-icon" />
+											<div class="skill-content">
+												<div class="skill-title">Prompt Engineering</div>
+												<div class="skill-desc">LLM mastery</div>
+											</div>
+										</div>
+										<div class="skill-card">
+											<img src="https://win98icons.alexmeub.com/icons/png/joystick-2.png" alt="Turbo" class="skill-icon" />
+											<div class="skill-content">
+												<div class="skill-title">60x Performance</div>
+												<div class="skill-desc">Speed optimization</div>
+											</div>
+										</div>
+										<div class="skill-card">
+											<img src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png" alt="Settings" class="skill-icon" />
+											<div class="skill-content">
+												<div class="skill-title">ADHD Hyperfocus</div>
+												<div class="skill-desc">Superpower mode</div>
+											</div>
+										</div>
+									</div>
+								</fieldset>
 							</article>
 							
 							<!-- Projects Tab -->
@@ -248,8 +389,8 @@
 											<ul>
 												<li>Personal development game</li>
 												<li>Thoughts/urges/tasks → kingdoms</li>
-												<li>Built with Claude API + agentic workflows</li>
-												<li><a href="https://github.com/cybermelons/lilaya" target="_blank">View Project →</a></li>
+												<li>Powered by Claude API + agentic workflows</li>
+												<li><a href="https://nut-prototype.pages.dev" target="_blank">View Demo →</a></li>
 											</ul>
 										</details>
 									</li>
@@ -265,11 +406,11 @@
 									</li>
 									<li>
 										<details>
-											<summary>Claude Workflows</summary>
+											<summary>Claude Agent Systems</summary>
 											<ul>
-												<li>Bleeding edge prompt engineering</li>
-												<li>Custom agent architectures</li>
-												<li>60% faster dev cycles</li>
+												<li>Advanced prompt engineering</li>
+												<li>Custom Claude agent architectures</li>
+												<li>60% faster development</li>
 											</ul>
 										</details>
 									</li>
@@ -279,38 +420,62 @@
 								<div class="project-details">
 									<h4>Featured: Lilaya</h4>
 									<p>Game where daily thoughts/urges/tasks build virtual kingdoms. Personal development through gameplay.</p>
-									<button onclick="window.open('https://github.com/cybermelons/lilaya', '_blank')">View on GitHub</button>
+									<button onclick="window.open('https://nut-prototype.pages.dev', '_blank')">View Demo</button>
 								</div>
 							</article>
 							
 							<!-- Experience Tab -->
 							<article role="tabpanel" hidden>
-								<!-- COMPONENT OPPORTUNITY: Table -->
-								<table>
-									<thead>
-										<tr>
-											<th>Company</th>
-											<th>Role</th>
-											<th>Achievement</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Bloomberg</td>
-											<td>Software Engineer</td>
-											<td><strong>60x faster builds</strong></td>
-										</tr>
-										<tr>
-											<td>Toki</td>
-											<td>Blockchain Dev</td>
-											<td>Ethereum rewards</td>
-										</tr>
-									</tbody>
-								</table>
+								<h3>Work Experience</h3>
+								<div class="sunken-panel" style="height: 200px; overflow-y: auto;">
+									<table class="interactive">
+										<thead>
+											<tr>
+												<th>Company</th>
+												<th>Role</th>
+												<th>Achievement</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>SharpTax</td>
+												<td>Automation Engineer</td>
+												<td>Custom workflow scripts</td>
+											</tr>
+											<tr>
+												<td>Bloomberg</td>
+												<td>Software Engineer</td>
+												<td>60x faster builds</td>
+											</tr>
+											<tr>
+												<td>Toki</td>
+												<td>Blockchain Developer</td>
+												<td>Ethereum rewards system</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+								<h3 style="margin-top: 20px;">Education</h3>
+								<div class="sunken-panel" style="padding: 10px;">
+									<div class="field-row">
+										<label>School:</label>
+										<span>Virginia Tech</span>
+									</div>
+									<div class="field-row">
+										<label>Degree:</label>
+										<span>B.S. Computer Science</span>
+									</div>
+									<div class="field-row">
+										<label>Graduated:</label>
+										<span>2015</span>
+									</div>
+								</div>
 								
 								<fieldset style="margin-top: 20px;">
-									<legend>Bloomberg Details</legend>
-									<p>Made C++ database builds 60x faster. Saved 10+ hours daily for the entire team. They still use my optimization.</p>
+									<legend>Recent Highlights</legend>
+									<p><strong>SharpTax:</strong> Automated tax workflow with custom scripts adding quick-copy buttons and usability enhancements.</p>
+									<p><strong>Bloomberg:</strong> Made C++ database builds 60x faster. Saved 10+ hours daily for the entire team.</p>
 								</fieldset>
 							</article>
 							
@@ -339,24 +504,33 @@
 						</div>
 					</div>
 					
-					<!-- COMPONENT OPPORTUNITY: Toolbar -->
+					<!-- Connect Window -->
 					<div class="window" style="margin-top: 20px;">
+						<div class="title-bar">
+							<div class="title-bar-text">Connect</div>
+							<div class="title-bar-controls">
+								<button aria-label="Close"></button>
+							</div>
+						</div>
 						<div class="window-body">
-							<menu role="toolbar">
-								<button onclick="window.open('https://github.com/cybermelons', '_blank')">
-									<span>GitHub</span>
-								</button>
-								<button onclick="window.open('https://linkedin.com/in/neon-genesis-evangelista', '_blank')">
-									<span>LinkedIn</span>
-								</button>
-								<button onclick="window.open('/resume.pdf', '_blank')">
-									<span>Resume.pdf</span>
-								</button>
-								<hr>
-								<button onclick="window.location.href='mailto:marc@evangelista.moe'">
-									<span>Send Mail</span>
-								</button>
-							</menu>
+							<div class="connect-grid">
+								<a href="https://github.com/cybermelons" target="_blank">
+									<img src="https://win98icons.alexmeub.com/icons/png/entire_network_globe-0.png" alt="Network" style="width: 16px; height: 16px; margin-right: 8px;">
+									GitHub
+								</a>
+								<a href="https://linkedin.com/in/neon-genesis-evangelista" target="_blank">
+									<img src="https://win98icons.alexmeub.com/icons/png/entire_network_globe-0.png" alt="Network" style="width: 16px; height: 16px; margin-right: 8px;">
+									LinkedIn
+								</a>
+								<a href="/business-card">
+									<img src="https://win98icons.alexmeub.com/icons/png/entire_network_globe-0.png" alt="Network" style="width: 16px; height: 16px; margin-right: 8px;">
+									Business Card
+								</a>
+								<a href="mailto:marc@evangelista.moe">
+									<img src="https://win98icons.alexmeub.com/icons/png/entire_network_globe-0.png" alt="Network" style="width: 16px; height: 16px; margin-right: 8px;">
+									Send Mail
+								</a>
+							</div>
 						</div>
 					</div>
 				</main>
@@ -402,29 +576,22 @@
 									<label for="squirrel">Squirrel!</label>
 								</div>
 							</div>
-						</div>
-					</div>
-					
-					<!-- Status Bar Window -->
-					<div class="window" style="margin-top: 20px;">
-						<div class="title-bar">
-							<div class="title-bar-text">System Status</div>
-							<div class="title-bar-controls">
-								<button aria-label="Close"></button>
+							
+							<!-- Theme switcher inside Quick Info -->
+							<div style="margin-top: 20px;">
+								<label>Theme:</label>
+								<div class="field-row">
+									<input type="radio" name="theme" id="win98" checked>
+									<label for="win98">Windows 98</label>
+								</div>
+								<div class="field-row">
+									<input type="radio" name="theme" id="winxp">
+									<label for="winxp">Windows XP</label>
+								</div>
 							</div>
 						</div>
-						<div class="window-body">
-							<div class="field-row">
-								<label>Optimization:</label>
-								<progress style="width: 150px;" max="100" value="60"></progress>
-								<span>60x</span>
-							</div>
-							<div class="field-row">
-								<label>Coffee Level:</label>
-								<progress style="width: 150px;" max="100" value="85"></progress>
-								<span>85%</span>
-							</div>
-						</div>
+						
+						<!-- Status bar -->
 						<div class="status-bar">
 							<p class="status-bar-field">Ready</p>
 							<p class="status-bar-field">ADHD: Enabled</p>
@@ -432,40 +599,17 @@
 						</div>
 					</div>
 					
+					
 					<!-- To-do sticky note -->
 					<div class="sticky-note">
 						<p style="margin: 0; font-weight: bold;">TO-DO:</p>
-						<p>☐ Make more things 60x faster</p>
-						<p>☐ Teach AI to make coffee</p>
-						<p>☐ humor lower human guard</p>
+						<p>☐ Ship AI-powered tools</p>
+						<p>☐ Automate everything</p>
+						<p>☐ Build codebases that build themselves</p>
 					</div>
 				</aside>
 			</div>
 			
-			<!-- Theme Switcher Window (moved to bottom) -->
-			<div class="window" style="margin-top: 20px;">
-				<div class="title-bar">
-					<div class="title-bar-text">Display Properties</div>
-					<div class="title-bar-controls">
-						<button aria-label="Help"></button>
-						<button aria-label="Close"></button>
-					</div>
-				</div>
-				<div class="window-body">
-					<fieldset>
-						<legend>Appearance</legend>
-						<div class="field-row">
-							<input type="radio" name="theme" id="win98" checked>
-							<label for="win98">Windows 98</label>
-						</div>
-						<div class="field-row">
-							<input type="radio" name="theme" id="winxp">
-							<label for="winxp">Windows XP</label>
-						</div>
-					</fieldset>
-					<p>Current theme: <span id="current-theme">Windows 98</span></p>
-				</div>
-			</div>
 		</div>
 		
 		<script>
@@ -553,6 +697,28 @@ P.S. Try the Konami code 😉
 							break;
 					}
 				}
+			});
+			
+			// Interactive table highlighting
+			document.querySelectorAll('table.interactive').forEach(element => {
+				element.addEventListener('click', (event) => {
+					const highlightedClass = 'highlighted';
+					const isRow = element => element.tagName === 'TR' && element.parentElement.tagName === 'TBODY';
+					const newlySelectedRow = event.composedPath().find(isRow);
+					if (!newlySelectedRow) return;
+					
+					const previouslySelectedRow = Array.from(newlySelectedRow.parentElement.children)
+						.filter(isRow)
+						.find(element => element.classList.contains(highlightedClass));
+					
+					if(previouslySelectedRow){
+						previouslySelectedRow.classList.toggle(highlightedClass);
+					}
+					
+					if (newlySelectedRow) {
+						newlySelectedRow.classList.toggle(highlightedClass);
+					}
+				});
 			});
 		</script>
 	</body>
