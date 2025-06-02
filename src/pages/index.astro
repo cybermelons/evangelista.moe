@@ -405,12 +405,31 @@
 						</div>
 					</div>
 					
-					<!-- COMPONENT OPPORTUNITY: Status bar -->
-					<div class="status-bar" style="margin-top: 20px;">
-						<p class="status-bar-field">Ready</p>
-						<p class="status-bar-field">
-							<span id="clock">12:00 PM</span>
-						</p>
+					<!-- Status Bar Window -->
+					<div class="window" style="margin-top: 20px;">
+						<div class="title-bar">
+							<div class="title-bar-text">System Status</div>
+							<div class="title-bar-controls">
+								<button aria-label="Close"></button>
+							</div>
+						</div>
+						<div class="window-body">
+							<div class="field-row">
+								<label>Optimization:</label>
+								<progress style="width: 150px;" max="100" value="60"></progress>
+								<span>60x</span>
+							</div>
+							<div class="field-row">
+								<label>Coffee Level:</label>
+								<progress style="width: 150px;" max="100" value="85"></progress>
+								<span>85%</span>
+							</div>
+						</div>
+						<div class="status-bar">
+							<p class="status-bar-field">Ready</p>
+							<p class="status-bar-field">ADHD: Enabled</p>
+							<p class="status-bar-field"><span id="clock">12:00 PM</span></p>
+						</div>
 					</div>
 					
 					<!-- To-do sticky note -->
