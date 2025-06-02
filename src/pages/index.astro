@@ -22,6 +22,21 @@
 				min-height: 100vh;
 			}
 			
+			/* Use Arial/Tahoma only for title bars and large headings */
+			.title-bar-text {
+				font-family: 'Tahoma', 'Arial', sans-serif !important;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			/* Use Arial for larger headings */
+			h1, h2, h3, h4, h5, h6,
+			.hero-metric {
+				font-family: 'Arial', 'Tahoma', sans-serif !important;
+				font-smooth: always;
+				-webkit-font-smoothing: antialiased;
+			}
+			
 			.container {
 				max-width: 1000px;
 				margin: 0 auto;
@@ -71,6 +86,32 @@
 				font-weight: bold;
 				color: #0066cc;
 				margin: 10px 0;
+			}
+			
+			/* Sticky note styles */
+			.sticky-note {
+				position: relative;
+				padding: 1em;
+				width: 250px;
+				max-width: 100%;
+				min-height: 180px;
+				background: linear-gradient(to bottom, rgba(0,0,0,.05), rgba(0,0,0,.25));
+				background-color: #FFFD75;
+				box-shadow: 5px 5px 10px -2px rgba(33,33,33,.3);
+				transform: rotate(-2deg) skew(-1deg,1deg);
+				transition: transform .15s;
+				margin: 20px auto 0;
+			}
+			
+			.sticky-note:hover {
+				transform: rotate(-1deg) skew(-0.5deg, 0.5deg);
+			}
+			
+			.sticky-note p {
+				font-family: 'Comic Sans MS', 'Gloria Hallelujah', cursive;
+				font-size: 14pt;
+				color: #333;
+				margin: 5px 0;
 			}
 			
 			/* Responsive - keep Windows aesthetic */
@@ -132,6 +173,16 @@
 				.window-body p {
 					word-wrap: break-word;
 				}
+				
+				/* Sticky note adjustments for mobile */
+				.sticky-note {
+					transform: rotate(-1deg) skew(-0.5deg, 0.5deg);
+					margin-top: 15px;
+				}
+				
+				.sticky-note p {
+					font-size: 12pt;
+				}
 			}
 		</style>
 	</head>
@@ -153,32 +204,34 @@
 						<div class="window-body">
 							<!-- COMPONENT OPPORTUNITY: Tabs -->
 							<menu role="tablist">
-								<button role="tab" aria-selected="true">General</button>
-								<button role="tab">Projects</button>
-								<button role="tab">Experience</button>
-								<button role="tab">System</button>
+								<li role="tab" aria-selected="true"><a href="#general">General</a></li>
+								<li role="tab"><a href="#projects">Projects</a></li>
+								<li role="tab"><a href="#experience">Experience</a></li>
+								<li role="tab"><a href="#system">System</a></li>
 							</menu>
 							
 							<!-- General Tab -->
 							<article role="tabpanel">
 								<h2>AI engineer. make computer do work.</h2>
-								<p>real 90s baby who grew up with Windows. now I build things with AI.</p>
+								<p>real 90s baby who grew up with Windows. now I build things with bleeding edge AI agentic workflows.</p>
 								
 								<!-- Make the 60x achievement prominent -->
 								<div class="performance-metric">
 									<div class="hero-metric">60x faster</div>
 									<p>That's how much faster I made C++ database builds at Bloomberg.</p>
-									<progress max="100" value="60"></progress>
+										<div class="progress-indicator segmented">
+											<span class="progress-indicator-bar" style="width: 60%;" />
+										</div>
 								</div>
 								
 								<!-- COMPONENT OPPORTUNITY: Details/Summary -->
 								<details open>
 									<summary>Core Skills</summary>
 									<ul>
-										<li>Claude API integration</li>
-										<li>Performance optimization</li>
-										<li>CLI tool development</li>
-										<li>ADHD-powered problem solving</li>
+										<li>Agentic AI workflows</li>
+										<li>Prompt engineering</li>
+										<li>60x performance optimization</li>
+										<li>ADHD-powered hyperfocus</li>
 									</ul>
 								</details>
 							</article>
@@ -194,7 +247,8 @@
 											<ul>
 												<li>Personal development game</li>
 												<li>Thoughts/urges/tasks → kingdoms</li>
-												<li>Built with Claude API</li>
+												<li>Built with Claude API + agentic workflows</li>
+												<li><a href="https://github.com/cybermelons/lilaya" target="_blank">View Project →</a></li>
 											</ul>
 										</details>
 									</li>
@@ -204,6 +258,7 @@
 											<ul>
 												<li>Pattern visualization</li>
 												<li>Practice analytics</li>
+												<li>AI-powered insights</li>
 											</ul>
 										</details>
 									</li>
@@ -211,8 +266,9 @@
 										<details>
 											<summary>Claude Workflows</summary>
 											<ul>
-												<li>Code generation agents</li>
-												<li>Document processing</li>
+												<li>Bleeding edge prompt engineering</li>
+												<li>Custom agent architectures</li>
+												<li>60% faster dev cycles</li>
 											</ul>
 										</details>
 									</li>
@@ -222,7 +278,7 @@
 								<div class="project-details">
 									<h4>Featured: Lilaya</h4>
 									<p>Game where daily thoughts/urges/tasks build virtual kingdoms. Personal development through gameplay.</p>
-									<button onclick="alert('Coming soon! Still building this one.')">Learn More</button>
+									<button onclick="window.open('https://github.com/cybermelons/lilaya', '_blank')">View on GitHub</button>
 								</div>
 							</article>
 							
@@ -314,19 +370,19 @@
 						<div class="window-body">
 							<div class="sunken-panel">
 								<table class="interactive">
-									<tr onclick="alert('Human verified ✓')">
+									<tr>
 										<td>Status:</td>
-										<td>Human</td>
+										<td>Human ✓</td>
 									</tr>
-									<tr onclick="alert('15+ years and counting')">
+									<tr>
 										<td>Experience:</td>
 										<td>15+ years</td>
 									</tr>
-									<tr onclick="alert('It\'s a feature, not a bug')">
+									<tr>
 										<td>ADHD:</td>
 										<td>Enabled</td>
 									</tr>
-									<tr onclick="alert('60x faster at Bloomberg!')">
+									<tr>
 										<td>Best optimization:</td>
 										<td>60x</td>
 									</tr>
@@ -357,16 +413,11 @@
 					</div>
 					
 					<!-- To-do sticky note -->
-					<div class="window" style="margin-top: 20px;">
-						<div class="title-bar">
-							<div class="title-bar-text">Sticky Note</div>
-						</div>
-						<div class="window-body" style="background: #ffff88; font-family: 'Comic Sans MS', cursive;">
-							<p style="margin: 0;">TO-DO:</p>
-							<p style="margin: 5px 0;">☐ Make more things 60x faster</p>
-							<p style="margin: 5px 0;">☐ Teach AI to make coffee</p>
-							<p style="margin: 5px 0;">☐ humor lower human guard</p>
-						</div>
+					<div class="sticky-note">
+						<p style="margin: 0; font-weight: bold;">TO-DO:</p>
+						<p>☐ Make more things 60x faster</p>
+						<p>☐ Teach AI to make coffee</p>
+						<p>☐ humor lower human guard</p>
 					</div>
 				</aside>
 			</div>
@@ -422,7 +473,9 @@
 			const panels = document.querySelectorAll('[role="tabpanel"]');
 			
 			tabs.forEach((tab, index) => {
-				tab.addEventListener('click', () => {
+				const link = tab.querySelector('a');
+				link.addEventListener('click', (e) => {
+					e.preventDefault();
 					tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
 					panels.forEach(p => p.hidden = true);
 					
@@ -467,16 +520,16 @@ P.S. Try the Konami code 😉
 				if (e.altKey) {
 					switch(e.key) {
 						case '1':
-							tabs[0].click();
+							tabs[0].querySelector('a').click();
 							break;
 						case '2':
-							tabs[1].click();
+							tabs[1].querySelector('a').click();
 							break;
 						case '3':
-							tabs[2].click();
+							tabs[2].querySelector('a').click();
 							break;
 						case '4':
-							tabs[3].click();
+							tabs[3].querySelector('a').click();
 							break;
 					}
 				}
