@@ -117,9 +117,15 @@
 					font-size: 1.2em;
 				}
 				
-				/* Make buttons more touch-friendly */
+				/* Make buttons more touch-friendly but preserve title bar controls */
 				button {
 					min-height: 36px;
+				}
+				
+				/* Preserve window control buttons */
+				.title-bar-controls button {
+					min-height: unset !important;
+					padding: unset !important;
 				}
 				
 				/* Fix sticky note width */
@@ -131,31 +137,6 @@
 	</head>
 	<body>
 		<div class="container">
-			<!-- Theme Switcher Window -->
-			<div class="window" style="margin-bottom: 20px;">
-				<div class="title-bar">
-					<div class="title-bar-text">Display Properties</div>
-					<div class="title-bar-controls">
-						<button aria-label="Help"></button>
-						<button aria-label="Close"></button>
-					</div>
-				</div>
-				<div class="window-body">
-					<fieldset>
-						<legend>Appearance</legend>
-						<div class="field-row">
-							<input type="radio" name="theme" id="win98" checked>
-							<label for="win98">Windows 98</label>
-						</div>
-						<div class="field-row">
-							<input type="radio" name="theme" id="winxp">
-							<label for="winxp">Windows XP</label>
-						</div>
-					</fieldset>
-					<p>Current theme: <span id="current-theme">Windows 98</span></p>
-				</div>
-			</div>
-
 			<div class="desktop-layout">
 				<!-- Main Content Area -->
 				<main>
@@ -388,6 +369,31 @@
 						</div>
 					</div>
 				</aside>
+			</div>
+			
+			<!-- Theme Switcher Window (moved to bottom) -->
+			<div class="window" style="margin-top: 20px;">
+				<div class="title-bar">
+					<div class="title-bar-text">Display Properties</div>
+					<div class="title-bar-controls">
+						<button aria-label="Help"></button>
+						<button aria-label="Close"></button>
+					</div>
+				</div>
+				<div class="window-body">
+					<fieldset>
+						<legend>Appearance</legend>
+						<div class="field-row">
+							<input type="radio" name="theme" id="win98" checked>
+							<label for="win98">Windows 98</label>
+						</div>
+						<div class="field-row">
+							<input type="radio" name="theme" id="winxp">
+							<label for="winxp">Windows XP</label>
+						</div>
+					</fieldset>
+					<p>Current theme: <span id="current-theme">Windows 98</span></p>
+				</div>
 			</div>
 		</div>
 		
