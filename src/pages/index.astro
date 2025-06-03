@@ -302,6 +302,16 @@
 				}
 				
 			}
+			
+			/* XP mode tab fix */
+			body:has(#winxp:checked) menu[role="tablist"] {
+				padding: 0;
+				margin: 0;
+			}
+			
+			body:has(#winxp:checked) menu[role="tablist"] li {
+				margin: 0;
+			}
 		</style>
 	</head>
 	<body>
