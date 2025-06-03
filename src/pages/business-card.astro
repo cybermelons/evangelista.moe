@@ -125,15 +125,12 @@
 			}
 			
 			/* Skills badges in horizontal layout */
-			.skills-section {
-				margin-bottom: 8px;
-			}
-			
 			.badge-container {
 				display: flex;
-				gap: 6px;
+				gap: 4px;
 				flex-wrap: wrap;
 				margin-bottom: 10px;
+				align-items: center;
 			}
 			
 			.badge {
@@ -143,6 +140,13 @@
 				padding: 2px 6px;
 				font-size: 8px;
 				white-space: nowrap;
+			}
+			
+			.badge.operator {
+				background: transparent;
+				border: none;
+				padding: 2px 3px;
+				font-weight: bold;
 			}
 			
 			/* Impact section with better layout */
@@ -196,13 +200,19 @@
 				margin-right: 0;
 			}
 			
-			/* QR code positioning with high z-index */
+			/* QR code positioning */
 			.qr-container {
 				position: absolute;
 				bottom: 22px;
 				right: 8px;
 				text-align: center;
 				z-index: 50;
+			}
+			
+			/* QR positioning for single-sided */
+			.single-sided .qr-container {
+				top: 22px;
+				bottom: auto;
 			}
 			
 			.qr-small {
@@ -221,29 +231,11 @@
 			.qr-label {
 				font-size: 7px;
 				margin-top: 2px;
-				background: white;
 				padding: 0 2px;
 			}
 			
-			/* Sticky note - repositioned */
-			.sticky-accent {
-				position: absolute;
-				top: 22px;
-				right: 8px;
-				width: 45px;
-				height: 40px;
-				background: #FFFD75;
-				transform: rotate(3deg);
-				box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-				padding: 3px;
-				font-size: 5pt;
-				font-family: 'Comic Sans MS', cursive;
-				text-align: center;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				line-height: 1;
-				z-index: 30;
+			.single-sided .qr-label {
+				background: white;
 			}
 			
 			/* Single vs double sided */
@@ -396,12 +388,6 @@
 					</div>
 				</div>
 				<div class="window-body">
-					<div class="sticky-accent">
-						AI<br>
-						AGENT<br>
-						EXPERT
-					</div>
-					
 					<div class="qr-container">
 						<div class="qr-small">
 							<img src="/site_qrcode.png" alt="QR Code" />
@@ -418,23 +404,25 @@
 						<div class="tagline">Building codebases that build themselves</div>
 						
 						<div class="badge-container">
-							<span class="badge">CS Background</span>
+							<span class="badge">CS Foundations</span>
+							<span class="badge operator">+</span>
 							<span class="badge">Agentic Engineering</span>
-							<span class="badge">Rapid Prototyping</span>
+							<span class="badge operator">=</span>
+							<span class="badge">Rapid, Robust Solutions</span>
 						</div>
 						
 						<div class="impact-section">
 							<div class="impact-row">
-								<span class="impact-label">Bloomberg:</span>
-								<span class="impact-value">60x faster C++ builds</span>
+								<span class="impact-label">What I Do:</span>
+								<span class="impact-value">Full-stack apps in hours, not weeks</span>
 							</div>
 							<div class="impact-row">
-								<span class="impact-label">Today:</span>
-								<span class="impact-value">Full-stack apps in hours</span>
+								<span class="impact-label">How:</span>
+								<span class="impact-value">Claude agentic workflows + Deep CS knowledge</span>
 							</div>
 							<div class="impact-row">
-								<span class="impact-label">Stack:</span>
-								<span class="impact-value">Deep systems + Modern web + AI</span>
+								<span class="impact-label">Experience:</span>
+								<span class="impact-value">Bloomberg, Virginia Tech CS</span>
 							</div>
 						</div>
 					</div>
