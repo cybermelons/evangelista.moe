@@ -12,9 +12,6 @@
 		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
-		<!-- html2canvas for image export -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-		
 		<style>
 			@page {
 				size: 3.5in 2in;
@@ -38,6 +35,7 @@
 				position: relative;
 				background: white;
 				page-break-after: always;
+				overflow: hidden;
 			}
 			
 			.window {
@@ -48,98 +46,217 @@
 				flex-direction: column;
 			}
 			
-			/* Only override fonts for title bar and headings */
-			.title-bar-text {
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-				margin: 2px;
-			}
-
+			/* Slim title bar to save space */
 			.title-bar {
-				margin: 2px;
-			}
-			
-			.window-body {
-				flex-grow: 1;
-				padding: 10px;
+				height: 20px;
+				padding: 2px;
 				display: flex;
-				flex-direction: column;
+				align-items: center;
 				justify-content: space-between;
-				font-size: 10px;
 			}
 			
-			.content-top {
-				flex-grow: 1;
+			.title-bar-text {
+				font-size: 11px;
+				line-height: 16px;
+				padding-left: 2px;
 			}
 			
-			/* Use Arial for headings only */
-			.name {
-				font-size: 14pt;
-				font-weight: bold;
-				margin-bottom: 4px;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-			}
-			
-			.achievement {
-				font-size: 12pt;
-				font-weight: bold;
-				color: #0052cc;
-				margin-bottom: 4px;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
-			}
-			
-			/* Small text keeps default pixelated font */
-			.tagline {
-				font-size: 9pt;
-				color: #333;
-				margin-bottom: 8px;
-				font-style: italic;
-			}
-			
-			.achievement-detail {
-				font-size: 8pt;
-				margin-bottom: 6px;
-			}
-			
-			.skills {
-				font-size: 8pt;
-				margin-bottom: 6px;
-				line-height: 1.4;
-			}
-			
-			.contact {
+			.title-bar-controls {
 				display: flex;
-				justify-content: space-between;
-				font-size: 8pt;
-				border-top: 1px solid #ccc;
-				padding-top: 6px;
+				height: 16px;
 			}
 			
-			/* Sticky note accent */
-			.sticky-accent {
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				width: 50px;
-				height: 50px;
-				background: #FFFD75;
-				transform: rotate(-5deg);
-				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-				padding: 4px;
-				font-size: 6pt;
-				font-family: 'Comic Sans MS', cursive;
-				z-index: 10;
-				text-align: center;
+			.title-bar-controls button {
+				width: 16px;
+				height: 14px;
+				min-width: 16px;
+				min-height: 14px;
+				padding: 0;
+				margin: 0 1px;
+				font-size: 8px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
 			
-			/* Back side with QR code */
-			.card-back {
+			.window-body {
+				flex-grow: 1;
+				padding: 8px;
+				padding-bottom: 0;
+				display: flex;
+				flex-direction: column;
+				font-size: 9px;
+				height: calc(100% - 20px);
+				overflow: hidden;
+			}
+			
+			/* Main content area */
+			.card-content {
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			/* Name and title */
+			.header-section {
+				margin-bottom: 8px;
+			}
+			
+			.name {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 2px;
+				font-family: 'Arial', sans-serif !important;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.title {
+				font-size: 10px;
+				color: #666;
+			}
+			
+			/* Main tagline */
+			.tagline {
+				font-size: 11px;
+				font-weight: bold;
+				color: #0052cc;
+				margin-bottom: 10px;
+				font-style: italic;
+			}
+			
+			/* Skills badges in horizontal layout */
+			.skills-section {
+				margin-bottom: 8px;
+			}
+			
+			.badge-container {
+				display: flex;
+				gap: 6px;
+				flex-wrap: wrap;
+				margin-bottom: 10px;
+			}
+			
+			.badge {
+				background: #c0c0c0;
+				border: 1px solid;
+				border-color: #fff #808080 #808080 #fff;
+				padding: 2px 6px;
+				font-size: 8px;
+				white-space: nowrap;
+			}
+			
+			/* Impact section with better layout */
+			.impact-section {
+				flex-grow: 1;
+			}
+			
+			.impact-row {
+				display: flex;
+				align-items: center;
+				margin-bottom: 4px;
+				font-size: 8px;
+			}
+			
+			.impact-label {
+				font-weight: bold;
+				color: #666;
+				width: 70px;
+				flex-shrink: 0;
+			}
+			
+			.impact-value {
+				flex-grow: 1;
+				padding: 2px 4px;
+				background: #fff;
+				border: 1px solid;
+				border-color: #808080 #fff #fff #808080;
+			}
+			
+			/* Status bar at bottom */
+			.card-status-bar {
+				height: 20px;
+				display: flex;
+				align-items: center;
+				font-size: 8px;
+				border-top: 1px solid #fff;
+				padding: 0 2px;
+				margin: 0 -8px;
+			}
+			
+			.status-bar-field {
+				border: 1px solid;
+				border-color: #808080 #fff #fff #808080;
+				padding: 2px 4px;
+				margin-right: 2px;
+				flex-shrink: 0;
+			}
+			
+			.status-bar-field:last-child {
+				margin-left: auto;
+				margin-right: 0;
+			}
+			
+			/* QR code positioning with high z-index */
+			.qr-container {
+				position: absolute;
+				bottom: 22px;
+				right: 8px;
+				text-align: center;
+				z-index: 50;
+			}
+			
+			.qr-small {
+				width: 50px;
+				height: 50px;
+				background: white;
+				padding: 2px;
+				border: 1px solid #808080;
+			}
+			
+			.qr-small img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.qr-label {
+				font-size: 7px;
+				margin-top: 2px;
+				background: white;
+				padding: 0 2px;
+			}
+			
+			/* Sticky note - repositioned */
+			.sticky-accent {
+				position: absolute;
+				top: 22px;
+				right: 8px;
+				width: 45px;
+				height: 40px;
+				background: #FFFD75;
+				transform: rotate(3deg);
+				box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+				padding: 3px;
+				font-size: 5pt;
+				font-family: 'Comic Sans MS', cursive;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				line-height: 1;
+				z-index: 30;
+			}
+			
+			/* Single vs double sided */
+			.single-sided #card-back {
+				display: none;
+			}
+			
+			.double-sided .qr-container {
+				display: none;
+			}
+			
+			/* Back side for double-sided */
+			.back-content {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -147,24 +264,18 @@
 				height: 100%;
 			}
 			
-			.qr-container {
+			.qr-large {
 				text-align: center;
 			}
 			
-			.qr-container img {
+			.qr-large img {
 				width: 120px;
 				height: 120px;
 			}
 			
-			.qr-label {
-				margin-top: 10px;
-				font-size: 10pt;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
-			}
-			
-			/* Version switching */
-			.single-sided #card-back {
-				display: none;
+			.qr-large .qr-label {
+				font-size: 10px;
+				margin-top: 8px;
 			}
 			
 			/* Print styles */
@@ -177,10 +288,6 @@
 				
 				.theme-controls {
 					display: none !important;
-				}
-				
-				.card-container {
-					page-break-inside: avoid;
 				}
 			}
 			
@@ -202,63 +309,78 @@
 				}
 			}
 			
-			/* Theme switcher for preview */
+			/* Theme switcher */
 			.theme-controls {
 				position: fixed;
 				top: 10px;
 				right: 10px;
-				background: white;
-				padding: 15px;
-				border: 2px solid #000;
 				z-index: 100;
-				font-size: 12px;
 			}
 			
-			.theme-controls > div {
-				margin-bottom: 10px;
+			.controls-window {
+				background: white;
+				min-width: 220px;
+			}
+			
+			.controls-window .window-body {
+				padding: 8px;
+			}
+			
+			.theme-controls fieldset {
+				margin-bottom: 8px;
+			}
+			
+			.theme-controls fieldset:last-child {
+				margin-bottom: 0;
 			}
 			
 			.theme-controls label {
-				margin-right: 10px;
+				display: block;
+				margin-bottom: 4px;
 			}
 			
 			.theme-controls button {
-				margin-right: 5px;
-			}
-			
-			/* Highlights for practical tools */
-			.highlight {
-				background: #e8f4f8;
-				padding: 1px 3px;
-				margin: 1px 0;
+				margin-right: 4px;
+				margin-bottom: 4px;
 			}
 		</style>
 	</head>
 	<body class="single-sided">
 		<!-- Theme controls for preview only -->
 		<div class="theme-controls">
-			<div>
-				<label>
-					<input type="radio" name="version" value="single" checked> Single-sided
-				</label>
-				<label>
-					<input type="radio" name="version" value="double"> Double-sided
-				</label>
-			</div>
-			<div>
-				<label>
-					<input type="radio" name="theme" value="98" checked> Win98
-				</label>
-				<label>
-					<input type="radio" name="theme" value="xp"> WinXP
-				</label>
-			</div>
-			<div>
-				<button onclick="window.print()">🖨️ Print</button>
-				<button onclick="exportAsImage()">📷 Save as Image</button>
-			</div>
-			<div>
-				<button onclick="window.location.href='/'">← Back to Site</button>
+			<div class="window controls-window">
+				<div class="title-bar">
+					<div class="title-bar-text">Card Options</div>
+					<div class="title-bar-controls">
+						<button aria-label="Close" onclick="this.closest('.theme-controls').style.display='none'">×</button>
+					</div>
+				</div>
+				<div class="window-body">
+					<fieldset>
+						<legend>Card Version</legend>
+						<label>
+							<input type="radio" name="version" value="single" checked> Single-sided
+						</label>
+						<label>
+							<input type="radio" name="version" value="double"> Double-sided
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Theme</legend>
+						<label>
+							<input type="radio" name="theme" value="98" checked> Win98
+						</label>
+						<label>
+							<input type="radio" name="theme" value="xp"> WinXP
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Export</legend>
+						<button onclick="window.print()">🖨️ Print</button>
+						<button onclick="alert('Use browser screenshot tool or Print to PDF')">📷 Save Image</button>
+					</fieldset>
+					<button onclick="window.location.href='/'">← Back to Site</button>
+				</div>
 			</div>
 		</div>
 		
@@ -268,9 +390,9 @@
 				<div class="title-bar">
 					<div class="title-bar-text">evangelista.exe</div>
 					<div class="title-bar-controls">
-						<button aria-label="Minimize"></button>
-						<button aria-label="Maximize"></button>
-						<button aria-label="Close"></button>
+						<button aria-label="Minimize">_</button>
+						<button aria-label="Maximize">□</button>
+						<button aria-label="Close">×</button>
 					</div>
 				</div>
 				<div class="window-body">
@@ -280,26 +402,46 @@
 						EXPERT
 					</div>
 					
-					<div class="content-top">
-						<div class="name">Marc Evangelista</div>
+					<div class="qr-container">
+						<div class="qr-small">
+							<img src="/site_qrcode.png" alt="QR Code" />
+						</div>
+						<div class="qr-label">www.evangelista.moe</div>
+					</div>
+					
+					<div class="card-content">
+						<div class="header-section">
+							<div class="name">Marc Evangelista</div>
+							<div class="title">AI + Full-Stack Developer</div>
+						</div>
+						
 						<div class="tagline">Building codebases that build themselves</div>
 						
-						<div class="achievement">Claude agentic workflows</div>
-						<div class="achievement-detail">I use AI agents to develop faster than traditional methods</div>
+						<div class="badge-container">
+							<span class="badge">CS Background</span>
+							<span class="badge">Agentic Engineering</span>
+							<span class="badge">Rapid Prototyping</span>
+						</div>
 						
-						<div class="skills">
-							<strong>REAL IMPACT:</strong><br>
-							• Bloomberg: 60x faster C++ builds<br>
-							• SharpTax: Automated tax workflows<br>
-							• Today: Full-stack apps in hours<br>
-							<br>
-							Backend → Full-Stack → AI Engineering
+						<div class="impact-section">
+							<div class="impact-row">
+								<span class="impact-label">Bloomberg:</span>
+								<span class="impact-value">60x faster C++ builds</span>
+							</div>
+							<div class="impact-row">
+								<span class="impact-label">Today:</span>
+								<span class="impact-value">Full-stack apps in hours</span>
+							</div>
+							<div class="impact-row">
+								<span class="impact-label">Stack:</span>
+								<span class="impact-value">Deep systems + Modern web + AI</span>
+							</div>
 						</div>
 					</div>
 					
-					<div class="contact">
-						<span>marc@evangelista.moe</span>
-						<span>www.evangelista.moe</span>
+					<div class="status-bar card-status-bar">
+						<p class="status-bar-field">github.com/cybermelons</p>
+						<p class="status-bar-field">marc@evangelista.moe</p>
 					</div>
 				</div>
 			</div>
@@ -311,14 +453,14 @@
 				<div class="title-bar">
 					<div class="title-bar-text">evangelista.moe</div>
 					<div class="title-bar-controls">
-						<button aria-label="Minimize"></button>
-						<button aria-label="Maximize"></button>
-						<button aria-label="Close"></button>
+						<button aria-label="Minimize">_</button>
+						<button aria-label="Maximize">□</button>
+						<button aria-label="Close">×</button>
 					</div>
 				</div>
 				<div class="window-body">
-					<div class="card-back">
-						<div class="qr-container">
+					<div class="back-content">
+						<div class="qr-large">
 							<img src="/site_qrcode.png" alt="QR Code" />
 							<div class="qr-label">www.evangelista.moe</div>
 						</div>
@@ -358,37 +500,6 @@
 					}
 				});
 			});
-			
-			// Export as image function
-			async function exportAsImage() {
-				const controls = document.querySelector('.theme-controls');
-				controls.style.display = 'none';
-				
-				const cards = [];
-				if (document.body.classList.contains('single-sided')) {
-					cards.push(document.getElementById('card-front'));
-				} else {
-					cards.push(document.getElementById('card-front'));
-					cards.push(document.getElementById('card-back'));
-				}
-				
-				for (let i = 0; i < cards.length; i++) {
-					const canvas = await html2canvas(cards[i], {
-						scale: 2,
-						backgroundColor: 'white'
-					});
-					
-					const link = document.createElement('a');
-					link.download = `business-card-${i === 0 ? 'front' : 'back'}.png`;
-					link.href = canvas.toDataURL();
-					link.click();
-					
-					// Small delay between downloads
-					await new Promise(resolve => setTimeout(resolve, 500));
-				}
-				
-				controls.style.display = 'block';
-			}
 		</script>
 	</body>
 </html>
