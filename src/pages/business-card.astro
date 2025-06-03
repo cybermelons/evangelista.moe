@@ -12,6 +12,8 @@
 		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
+		<!-- html2canvas for image export -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 		
 		<style>
 			@page {
@@ -82,20 +84,19 @@
 			}
 			
 			.achievement {
-				font-size: 15pt;
+				font-size: 12pt;
 				font-weight: bold;
-				color: #0052cc; /* Stronger blue for AI event impact */
+				color: #0052cc;
 				margin-bottom: 4px;
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
 			}
 			
 			/* Small text keeps default pixelated font */
 			.tagline {
-				font-size: 8pt;
-				color: #666;
+				font-size: 9pt;
+				color: #333;
 				margin-bottom: 8px;
+				font-style: italic;
 			}
 			
 			.achievement-detail {
@@ -104,8 +105,9 @@
 			}
 			
 			.skills {
-				font-size: 7pt;
+				font-size: 8pt;
 				margin-bottom: 6px;
+				line-height: 1.4;
 			}
 			
 			.contact {
@@ -116,20 +118,24 @@
 				padding-top: 6px;
 			}
 			
-			/* Sticky note accent - smaller and repositioned */
+			/* Sticky note accent */
 			.sticky-accent {
 				position: absolute;
 				top: 5px;
 				right: 5px;
-				width: 45px;
-				height: 45px;
+				width: 50px;
+				height: 50px;
 				background: #FFFD75;
 				transform: rotate(-5deg);
 				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 				padding: 4px;
-				font-size: 5pt;
+				font-size: 6pt;
 				font-family: 'Comic Sans MS', cursive;
 				z-index: 10;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 			
 			/* Back side with QR code */
@@ -156,6 +162,11 @@
 				font-family: 'Arial', 'Tahoma', sans-serif !important;
 			}
 			
+			/* Version switching */
+			.single-sided #card-back {
+				display: none;
+			}
+			
 			/* Print styles */
 			@media print {
 				body {
@@ -166,6 +177,10 @@
 				
 				.theme-controls {
 					display: none !important;
+				}
+				
+				.card-container {
+					page-break-inside: avoid;
 				}
 			}
 			
@@ -193,31 +208,65 @@
 				top: 10px;
 				right: 10px;
 				background: white;
-				padding: 10px;
+				padding: 15px;
 				border: 2px solid #000;
 				z-index: 100;
+				font-size: 12px;
+			}
+			
+			.theme-controls > div {
+				margin-bottom: 10px;
+			}
+			
+			.theme-controls label {
+				margin-right: 10px;
+			}
+			
+			.theme-controls button {
+				margin-right: 5px;
+			}
+			
+			/* Highlights for practical tools */
+			.highlight {
+				background: #e8f4f8;
+				padding: 1px 3px;
+				margin: 1px 0;
 			}
 		</style>
 	</head>
-	<body>
+	<body class="single-sided">
 		<!-- Theme controls for preview only -->
 		<div class="theme-controls">
-			<label>
-				<input type="radio" name="theme" value="98" checked> Win98
-			</label>
-			<label>
-				<input type="radio" name="theme" value="xp"> WinXP
-			</label>
-			<div style="margin-top: 10px;">
+			<div>
+				<label>
+					<input type="radio" name="version" value="single" checked> Single-sided
+				</label>
+				<label>
+					<input type="radio" name="version" value="double"> Double-sided
+				</label>
+			</div>
+			<div>
+				<label>
+					<input type="radio" name="theme" value="98" checked> Win98
+				</label>
+				<label>
+					<input type="radio" name="theme" value="xp"> WinXP
+				</label>
+			</div>
+			<div>
+				<button onclick="window.print()">🖨️ Print</button>
+				<button onclick="exportAsImage()">📷 Save as Image</button>
+			</div>
+			<div>
 				<button onclick="window.location.href='/'">← Back to Site</button>
 			</div>
 		</div>
 		
 		<!-- Front of card -->
-		<div class="card-container">
+		<div class="card-container" id="card-front">
 			<div class="window">
 				<div class="title-bar">
-					<div class="title-bar-text">Marc Evangelista - real human engineer</div>
+					<div class="title-bar-text">evangelista.exe</div>
 					<div class="title-bar-controls">
 						<button aria-label="Minimize"></button>
 						<button aria-label="Maximize"></button>
@@ -226,34 +275,38 @@
 				</div>
 				<div class="window-body">
 					<div class="sticky-accent">
-						RAPID<br>
-						PROTO-<br>
-						TYPING
+						AI<br>
+						AGENT<br>
+						EXPERT
 					</div>
 					
 					<div class="content-top">
 						<div class="name">Marc Evangelista</div>
 						<div class="tagline">Building codebases that build themselves</div>
 						
-						<div class="achievement">Prototype in hours, not weeks</div>
-						<div class="achievement-detail">Claude agentic workflows • Modern web development</div>
+						<div class="achievement">Claude agentic workflows</div>
+						<div class="achievement-detail">I use AI agents to develop faster than traditional methods</div>
 						
 						<div class="skills">
-							Prompt Engineering • React/TypeScript • Next.js<br>
-							Bloomberg • SharpTax • Virginia Tech CS
+							<strong>REAL IMPACT:</strong><br>
+							• Bloomberg: 60x faster C++ builds<br>
+							• SharpTax: Automated tax workflows<br>
+							• Today: Full-stack apps in hours<br>
+							<br>
+							Backend → Full-Stack → AI Engineering
 						</div>
 					</div>
 					
 					<div class="contact">
 						<span>marc@evangelista.moe</span>
-						<span>github.com/cybermelons</span>
+						<span>www.evangelista.moe</span>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- Back of card -->
-		<div class="card-container">
+		<div class="card-container" id="card-back">
 			<div class="window">
 				<div class="title-bar">
 					<div class="title-bar-text">evangelista.moe</div>
@@ -275,7 +328,7 @@
 		</div>
 		
 		<script>
-			// Theme switcher for preview
+			// Theme switcher
 			const themeInputs = document.querySelectorAll('input[name="theme"]');
 			const win98CSS = document.getElementById('win98-css');
 			const winxpCSS = document.getElementById('winxp-css');
@@ -291,7 +344,51 @@
 					}
 				});
 			});
+			
+			// Version switcher
+			const versionInputs = document.querySelectorAll('input[name="version"]');
+			versionInputs.forEach(input => {
+				input.addEventListener('change', (e) => {
+					if (e.target.value === 'single') {
+						document.body.classList.add('single-sided');
+						document.body.classList.remove('double-sided');
+					} else {
+						document.body.classList.remove('single-sided');
+						document.body.classList.add('double-sided');
+					}
+				});
+			});
+			
+			// Export as image function
+			async function exportAsImage() {
+				const controls = document.querySelector('.theme-controls');
+				controls.style.display = 'none';
+				
+				const cards = [];
+				if (document.body.classList.contains('single-sided')) {
+					cards.push(document.getElementById('card-front'));
+				} else {
+					cards.push(document.getElementById('card-front'));
+					cards.push(document.getElementById('card-back'));
+				}
+				
+				for (let i = 0; i < cards.length; i++) {
+					const canvas = await html2canvas(cards[i], {
+						scale: 2,
+						backgroundColor: 'white'
+					});
+					
+					const link = document.createElement('a');
+					link.download = `business-card-${i === 0 ? 'front' : 'back'}.png`;
+					link.href = canvas.toDataURL();
+					link.click();
+					
+					// Small delay between downloads
+					await new Promise(resolve => setTimeout(resolve, 500));
+				}
+				
+				controls.style.display = 'block';
+			}
 		</script>
 	</body>
 </html>
-
