@@ -12,7 +12,6 @@
 		<link rel="stylesheet" href="https://unpkg.com/98.css" id="win98-css" />
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
-		
 		<style>
 			@page {
 				size: 3.5in 2in;
@@ -36,6 +35,7 @@
 				position: relative;
 				background: white;
 				page-break-after: always;
+				overflow: hidden;
 			}
 			
 			.window {
@@ -46,94 +46,255 @@
 				flex-direction: column;
 			}
 			
-			/* Only override fonts for title bar and headings */
-			.title-bar-text {
-				font-family: 'Tahoma', 'Arial', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-				margin: 2px;
-			}
-
+			/* Slim title bar to save space */
 			.title-bar {
-				margin: 2px;
+				height: 20px;
+				padding: 2px;
+				margin-left: 2px;
+				margin-top: 2px;
+				margin-right: 2px;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+			}
+			
+			.title-bar-text {
+				font-size: 11px;
+				line-height: 16px;
+				padding-left: 2px;
+			}
+			
+			.title-bar-controls {
+				display: flex;
+				height: 16px;
+			}
+			
+			.title-bar-controls button {
+				width: 16px;
+				height: 14px;
+				min-width: 16px;
+				min-height: 14px;
+				padding: 0;
+				margin: 0 1px;
+				font-size: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 			
 			.window-body {
 				flex-grow: 1;
-				padding: 10px;
+				padding: 8px;
+				padding-bottom: 0;
 				display: flex;
 				flex-direction: column;
-				justify-content: space-between;
-				font-size: 10px;
+				font-size: 9px;
+				height: calc(100% - 20px);
+				overflow: hidden;
 			}
 			
-			.content-top {
+			/* Main content area */
+			.card-content {
+				flex-grow: 1;
+				display: flex;
+				flex-direction: column;
+			}
+			
+			/* Name and title */
+			.header-section {
+				margin-bottom: 4px;
+			}
+			
+			.name {
+				font-size: 16px;
+				font-weight: bold;
+				margin-bottom: 2px;
+				font-family: 'Arial', sans-serif !important;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.title {
+				font-size: 10px;
+				color: #666;
+			}
+			
+			/* Main tagline */
+			.tagline {
+				font-size: 11px;
+				font-weight: bold;
+				color: #0052cc;
+				margin-bottom: 6px;
+				font-style: italic;
+			}
+			
+			/* Skills grid - icon-based like main site */
+			.skills-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 3px;
+				margin-bottom: 4px;
 				flex-grow: 1;
 			}
 			
-			/* Use Arial for headings only */
-			.name {
-				font-size: 14pt;
-				font-weight: bold;
-				margin-bottom: 4px;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-			}
-			
-			.achievement {
-				font-size: 15pt;
-				font-weight: bold;
-				color: #0052cc; /* Stronger blue for AI event impact */
-				margin-bottom: 4px;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
-				font-smooth: always;
-				-webkit-font-smoothing: antialiased;
-			}
-			
-			/* Small text keeps default pixelated font */
-			.tagline {
-				font-size: 8pt;
-				color: #666;
-				margin-bottom: 8px;
-			}
-			
-			.achievement-detail {
-				font-size: 8pt;
-				margin-bottom: 6px;
-			}
-			
-			.skills {
-				font-size: 7pt;
-				margin-bottom: 6px;
-			}
-			
-			.contact {
-				display: flex;
-				justify-content: space-between;
-				font-size: 8pt;
-				border-top: 1px solid #ccc;
-				padding-top: 6px;
-			}
-			
-			/* Sticky note accent - smaller and repositioned */
-			.sticky-accent {
-				position: absolute;
-				top: 5px;
-				right: 5px;
-				width: 45px;
-				height: 45px;
-				background: #FFFD75;
-				transform: rotate(-5deg);
-				box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+			.skill-card {
+				background: #c0c0c0;
+				border: 2px solid;
+				border-color: #ffffff #808080 #808080 #ffffff;
 				padding: 4px;
-				font-size: 5pt;
-				font-family: 'Comic Sans MS', cursive;
-				z-index: 10;
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				cursor: default;
 			}
 			
-			/* Back side with QR code */
-			.card-back {
+			.skill-card:active {
+				border-color: #808080 #ffffff #ffffff #808080;
+			}
+			
+			.skill-icon {
+				margin-right: 2px;
+				margin-left: 2px;
+				width: 16px;
+				height: 16px;
+				flex-shrink: 0;
+			}
+			
+			.skill-content {
+				text-align: left;
+				flex-grow: 1;
+			}
+			
+			.skill-title {
+				font-weight: bold;
+				font-size: 11px;
+				margin-bottom: 1px;
+			}
+			
+			.skill-desc {
+				font-size: 11px;
+				color: #000;
+			}
+			
+			/* XP theme overrides for skills */
+			body:has(#winxp:checked) .skill-card {
+				background: #ece9d8;
+				border-radius: 3px;
+				border: 1px solid #003c74;
+				box-shadow: inset 0 1px 0 #ffffff;
+			}
+			
+			body:has(#winxp:checked) .skill-card:hover {
+				background: #e4f3ff;
+				border-color: #0078d7;
+			}
+			
+			/* Formula badge container */
+			.formula-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 4px;
+				margin-bottom: 8px;
+				font-size: 9px;
+			}
+			
+			.formula-badge {
+				background: #c0c0c0;
+				border: 1px solid;
+				border-color: #fff #808080 #808080 #fff;
+				padding: 2px 4px;
+				font-size: 9px;
+				white-space: nowrap;
+			}
+			
+			.formula-operator {
+				font-weight: bold;
+				padding: 0 2px;
+			}
+			
+			/* Status bar at bottom */
+			.card-status-bar {
+				height: 20px;
+				display: flex;
+				align-items: center;
+				font-size: 8px;
+				border-top: 1px solid #fff;
+				padding: 0 2px;
+				margin: 0 -8px;
+			}
+			
+			.status-bar-field {
+				border: 1px solid;
+				border-color: #808080 #fff #fff #808080;
+				padding: 2px 4px;
+				font-size: 11px;
+				margin-right: 2px;
+				flex-shrink: 0;
+			}
+			.status-bar-field-right {
+				margin-right: 0;
+			}
+			
+			.status-bar-field:last-child {
+				margin-left: auto;
+				margin-right: 0;
+			}
+			
+			/* QR code positioning */
+			.qr-container {
+				position: absolute;
+				bottom: 22px;
+				right: 8px;
+				text-align: center;
+				z-index: 50;
+			}
+			
+			/* QR positioning for single-sided */
+			.single-sided .qr-container {
+				top: 24px;
+				bottom: auto;
+				right: 8px;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-end;
+			}
+			
+			.qr-small {
+				width: 50px;
+				height: 50px;
+				background: white;
+				padding: 2px;
+				border: 1px solid #808080;
+			}
+			
+			.qr-small img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.qr-label {
+				visibility: hidden;
+				font-size: 7px;
+				margin-top: 2px;
+				padding: 0 2px;
+				text-align: right;
+			}
+			
+			.single-sided .qr-label {
+				background: white;
+			}
+			
+			/* Single vs double sided */
+			.single-sided #card-back {
+				display: none;
+			}
+			
+			.double-sided .qr-container {
+				display: none;
+			}
+			
+			/* Back side for double-sided */
+			.back-content {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -141,19 +302,18 @@
 				height: 100%;
 			}
 			
-			.qr-container {
+			.qr-large {
 				text-align: center;
 			}
 			
-			.qr-container img {
+			.qr-large img {
 				width: 120px;
 				height: 120px;
 			}
 			
-			.qr-label {
-				margin-top: 10px;
-				font-size: 10pt;
-				font-family: 'Arial', 'Tahoma', sans-serif !important;
+			.qr-large .qr-label {
+				font-size: 10px;
+				margin-top: 8px;
 			}
 			
 			/* Print styles */
@@ -187,73 +347,150 @@
 				}
 			}
 			
-			/* Theme switcher for preview */
+			/* Theme switcher */
 			.theme-controls {
 				position: fixed;
 				top: 10px;
 				right: 10px;
-				background: white;
-				padding: 10px;
-				border: 2px solid #000;
 				z-index: 100;
+			}
+			
+			.controls-window {
+				background: white;
+				min-width: 220px;
+			}
+			
+			.controls-window .window-body {
+				padding: 8px;
+			}
+			
+			.theme-controls fieldset {
+				margin-bottom: 8px;
+			}
+			
+			.theme-controls fieldset:last-child {
+				margin-bottom: 0;
+			}
+			
+			.theme-controls label {
+				display: block;
+				margin-bottom: 4px;
+			}
+			
+			.theme-controls button {
+				margin-right: 4px;
+				margin-bottom: 4px;
 			}
 		</style>
 	</head>
-	<body>
+	<body class="single-sided">
 		<!-- Theme controls for preview only -->
 		<div class="theme-controls">
-			<label>
-				<input type="radio" name="theme" value="98" checked> Win98
-			</label>
-			<label>
-				<input type="radio" name="theme" value="xp"> WinXP
-			</label>
-			<div style="margin-top: 10px;">
-				<button onclick="window.location.href='/'">← Back to Site</button>
+			<div class="window controls-window">
+				<div class="title-bar">
+					<div class="title-bar-text">Card Options</div>
+					<div class="title-bar-controls">
+						<button aria-label="Close" onclick="this.closest('.theme-controls').style.display='none'">×</button>
+					</div>
+				</div>
+				<div class="window-body">
+					<fieldset>
+						<legend>Card Version</legend>
+						<label>
+							<input type="radio" name="version" value="single" checked> Single-sided
+						</label>
+						<label>
+							<input type="radio" name="version" value="double"> Double-sided
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Theme</legend>
+						<label>
+							<input type="radio" name="theme" value="98" checked> Win98
+						</label>
+						<label>
+							<input type="radio" name="theme" value="xp"> WinXP
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Export</legend>
+						<button onclick="window.print()">🖨️ Print</button>
+						<button onclick="alert('Use browser screenshot tool or Print to PDF')">📷 Save Image</button>
+					</fieldset>
+					<button onclick="window.location.href='/'">← Back to Site</button>
+				</div>
 			</div>
 		</div>
 		
 		<!-- Front of card -->
-		<div class="card-container">
+		<div class="card-container" id="card-front">
 			<div class="window">
 				<div class="title-bar">
-					<div class="title-bar-text">Marc Evangelista - real human engineer</div>
+					<div class="title-bar-text">www.evangelista.moe</div>
 					<div class="title-bar-controls">
 						<button aria-label="Minimize"></button>
 						<button aria-label="Maximize"></button>
-						<button aria-label="Close"></button>
+						<button aria-label="Close">×</button>
 					</div>
 				</div>
 				<div class="window-body">
-					<div class="sticky-accent">
-						AI<br>
-						AGENT<br>
-						EXPERT
+					<div class="qr-container">
+						<div class="qr-small">
+							<img src="/site_qrcode.png" alt="QR Code" />
+						</div>
+						<div class="qr-label">www.evangelista.moe</div>
 					</div>
 					
-					<div class="content-top">
-						<div class="name">Marc Evangelista</div>
-						<div class="tagline">me make computer do work.</div>
+					<div class="card-content">
+						<div class="header-section">
+							<div class="name">Marc Evangelista</div>
+							<div class="title">AI + Full-Stack Engineer</div>
+						</div>
 						
-						<div class="achievement">60x faster with Claude AI</div>
-						<div class="achievement-detail">Bleeding edge agentic engineering</div>
+						<div class="tagline">Building codebases that build themselves</div>
 						
-						<div class="skills">
-							Claude Code • Prompt Engineering • LLM Integration<br>
-							Bloomberg (60x speedup) • SharpTax • Ethereum
+						<div class="skills-grid">
+							<div class="skill-card">
+								<img src="https://win98icons.alexmeub.com/icons/png/html-3.png" alt="Web" class="skill-icon" />
+								<div class="skill-content">
+									<div class="skill-title">What I Do</div>
+									<div class="skill-desc">Full-stack apps in hours</div>
+								</div>
+							</div>
+							<div class="skill-card">
+								<img src="https://win98icons.alexmeub.com/icons/png/joystick-2.png" alt="Speed" class="skill-icon" />
+								<div class="skill-content">
+									<div class="skill-title">How</div>
+									<div class="skill-desc">Claude + CS expertise</div>
+								</div>
+							</div>
+							<div class="skill-card">
+								<img src="https://win98icons.alexmeub.com/icons/png/world-2.png" alt="Bloomberg" class="skill-icon" />
+								<div class="skill-content">
+									<div class="skill-title">Experience</div>
+									<div class="skill-desc">Bloomberg, CS@VA Tech</div>
+								</div>
+							</div>
+							<div class="skill-card">
+								<img src="https://win98icons.alexmeub.com/icons/png/msagent-1.png" alt="AI" class="skill-icon" />
+								<div class="skill-content">
+									<div class="skill-title">AI Expert</div>
+									<div class="skill-desc">Agentic workflows</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					
-					<div class="contact">
-						<span>marc@evangelista.moe</span>
-						<span>github.com/cybermelons</span>
+					<div class="status-bar card-status-bar">
+						<p class="status-bar-field">github.com/cybermelons</p>
+						<p class="status-bar-field status-bar-field-right">marc@evangelista.moe</p>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		<!-- Back of card -->
-		<div class="card-container">
+		<div class="card-container" id="card-back">
 			<div class="window">
 				<div class="title-bar">
 					<div class="title-bar-text">evangelista.moe</div>
@@ -264,10 +501,10 @@
 					</div>
 				</div>
 				<div class="window-body">
-					<div class="card-back">
-						<div class="qr-container">
+					<div class="back-content">
+						<div class="qr-large">
 							<img src="/site_qrcode.png" alt="QR Code" />
-							<div class="qr-label">evangelista.moe</div>
+							<div class="qr-label">www.evangelista.moe</div>
 						</div>
 					</div>
 				</div>
@@ -275,7 +512,7 @@
 		</div>
 		
 		<script>
-			// Theme switcher for preview
+			// Theme switcher
 			const themeInputs = document.querySelectorAll('input[name="theme"]');
 			const win98CSS = document.getElementById('win98-css');
 			const winxpCSS = document.getElementById('winxp-css');
@@ -288,6 +525,20 @@
 					} else {
 						win98CSS.disabled = true;
 						winxpCSS.disabled = false;
+					}
+				});
+			});
+			
+			// Version switcher
+			const versionInputs = document.querySelectorAll('input[name="version"]');
+			versionInputs.forEach(input => {
+				input.addEventListener('change', (e) => {
+					if (e.target.value === 'single') {
+						document.body.classList.add('single-sided');
+						document.body.classList.remove('double-sided');
+					} else {
+						document.body.classList.remove('single-sided');
+						document.body.classList.add('double-sided');
 					}
 				});
 			});
