@@ -73,3 +73,26 @@ Site deploys to evangelista.moe via [deployment service].
 ---
 
 Remember: This is a 3-hour project that shows more personality than a 3-week "professional" portfolio. Ship weird things that actually work.
+
+## Future Concept: Neon Genesis Evangelista (NGE)
+
+An alternative theme concept that transforms the portfolio from "quirky developer" to "consciousness engineer":
+
+### Core Concept
+- **Visual**: Stark black/white Evangelion-inspired terminal aesthetics with compressed typography
+- **Narrative**: Position as "PILOT-01" who actively operates their mind-body system rather than drifting
+- **Philosophy**: "Most people sleepwalk through life" - apply technical rigor to consciousness development
+
+### Key Elements
+- Compressed serif headers (Crimson Text with CSS transform)
+- Terminal/HUD interfaces with green-tinted displays  
+- Progress bars showing "97.3% synchronization" (always improving, never complete)
+- Glitch effects suggesting system evolution
+- 5-act narrative structure from initialization to ongoing mission
+
+### Connection to Projects
+- **Lilaya**: The practical application of consciousness engineering
+- **tiddy.city**: Becomes the "tactical map" for navigating inner world via NUT system
+- **evangelista.moe**: Bridges technical achievements with consciousness work
+
+This concept elevates the brand from Windows nostalgia to Eva-inspired "pilot your own life" framework, connecting all projects under systematic self-development. See `/nge/nge.md` for full design system.
