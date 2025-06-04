@@ -14,7 +14,7 @@
 		
 		<style>
 			@page {
-				size: 3.5in 2in;
+				size: 3.75in 2.25in; /* Added 0.125in bleed on all sides */
 				margin: 0;
 			}
 			
@@ -30,32 +30,37 @@
 			}
 			
 			.card-container {
-				width: 3.5in;
-				height: 2in;
+				width: 3.75in; /* Added 0.125in bleed on each side */
+				height: 2.25in; /* Added 0.125in bleed on each side */
 				position: relative;
-				background: white;
+				background: #c0c0c0; /* Window background extends to bleed */
 				page-break-after: always;
 				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 			
 			.window {
-				width: 100%;
-				height: 100%;
+				width: calc(100% - 0.25in); /* Account for bleed */
+				height: calc(100% - 0.25in); /* Account for bleed */
 				margin: 0;
 				display: flex;
 				flex-direction: column;
+				background: #c0c0c0;
+				border: 2px solid;
+				border-color: #ffffff #808080 #808080 #ffffff;
 			}
 			
 			/* Slim title bar to save space */
 			.title-bar {
 				height: 20px;
 				padding: 2px;
-				margin-left: 2px;
-				margin-top: 2px;
-				margin-right: 2px;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				background: #000080;
+				color: white;
 			}
 			
 			.title-bar-text {
@@ -186,6 +191,15 @@
 			body:has(#winxp:checked) .skill-card:hover {
 				background: #e4f3ff;
 				border-color: #0078d7;
+			}
+			
+			/* XP theme overrides for title bar */
+			body:has(#winxp:checked) .title-bar {
+				background: linear-gradient(to bottom, #0054e3, #0073ea);
+			}
+			
+			body:has(#winxp:checked) .window {
+				border-radius: 6px 6px 0 0;
 			}
 			
 			/* Formula badge container */
@@ -345,6 +359,20 @@
 				
 				.card-container {
 					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+					position: relative;
+				}
+				
+				/* Cut guide overlay for screen preview */
+				.card-container::before {
+					content: '';
+					position: absolute;
+					top: 0.125in;
+					left: 0.125in;
+					right: 0.125in;
+					bottom: 0.125in;
+					border: 1px dashed rgba(255, 0, 0, 0.3);
+					pointer-events: none;
+					z-index: 1000;
 				}
 			}
 			
