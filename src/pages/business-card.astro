@@ -89,8 +89,8 @@
 			
 			.window-body {
 				flex-grow: 1;
-				padding: 8px;
-				padding-bottom: 0;
+				padding-left: 8px;
+				padding-right: 8px;
 				display: flex;
 				flex-direction: column;
 				font-size: 9px;
@@ -234,7 +234,7 @@
 				font-size: 8px;
 				border-top: 1px solid #fff;
 				padding: 0 2px;
-				margin: 0 -8px;
+				margin: 0 -8px 2px -8px;
 			}
 			
 			.status-bar-field {
@@ -266,9 +266,9 @@
 			
 			/* QR positioning for single-sided */
 			.single-sided .qr-container {
-				top: 24px;
+				top: 36px;
+				right: 22px;
 				bottom: auto;
-				right: 8px;
 				display: flex;
 				flex-direction: column;
 				align-items: flex-end;
@@ -360,19 +360,6 @@
 				.card-container {
 					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 					position: relative;
-				}
-				
-				/* Cut guide overlay for screen preview */
-				.card-container::before {
-					content: '';
-					position: absolute;
-					top: 0.125in;
-					left: 0.125in;
-					right: 0.125in;
-					bottom: 0.125in;
-					border: 1px dashed rgba(255, 0, 0, 0.3);
-					pointer-events: none;
-					z-index: 1000;
 				}
 			}
 			
