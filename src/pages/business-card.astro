@@ -13,7 +13,14 @@
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
 		<style>
+			/* Default no bleed */
 			@page {
+				size: 3.5in 2in;
+				margin: 0;
+			}
+			
+			/* With bleed */
+			body.with-bleed @page {
 				size: 3.75in 2.25in; /* Added 0.125in bleed on all sides */
 				margin: 0;
 			}
@@ -29,24 +36,39 @@
 				padding: 0;
 			}
 			
+			/* Default no bleed */
 			.card-container {
-				width: 3.75in; /* Added 0.125in bleed on each side */
-				height: 2.25in; /* Added 0.125in bleed on each side */
+				width: 3.5in;
+				height: 2in;
 				position: relative;
-				background: #c0c0c0; /* Window background extends to bleed */
+				background: white;
 				page-break-after: always;
 				overflow: hidden;
+			}
+			
+			/* With bleed */
+			body.with-bleed .card-container {
+				width: 3.75in; /* Added 0.125in bleed on each side */
+				height: 2.25in; /* Added 0.125in bleed on each side */
+				background: #c0c0c0; /* Window background extends to bleed */
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
 			
+			/* Default no bleed */
 			.window {
-				width: calc(100% - 0.25in); /* Account for bleed */
-				height: calc(100% - 0.25in); /* Account for bleed */
+				width: 100%;
+				height: 100%;
 				margin: 0;
 				display: flex;
 				flex-direction: column;
+			}
+			
+			/* With bleed */
+			body.with-bleed .window {
+				width: calc(100% - 0.25in); /* Account for bleed */
+				height: calc(100% - 0.25in); /* Account for bleed */
 				background: #c0c0c0;
 				border: 2px solid;
 				border-color: #ffffff #808080 #808080 #ffffff;
@@ -266,12 +288,18 @@
 			
 			/* QR positioning for single-sided */
 			.single-sided .qr-container {
-				top: 36px;
-				right: 22px;
+				top: 28px;
+				right: 14px;
 				bottom: auto;
 				display: flex;
 				flex-direction: column;
 				align-items: flex-end;
+			}
+			
+			/* QR positioning adjustments for bleed */
+			body.with-bleed .single-sided .qr-container {
+				top: 36px;
+				right: 22px;
 			}
 			
 			.qr-small {
@@ -429,6 +457,12 @@
 						</label>
 					</fieldset>
 					<fieldset>
+						<legend>Print Options</legend>
+						<label>
+							<input type="checkbox" id="enable-bleed"> Add bleed (for professional printing)
+						</label>
+					</fieldset>
+					<fieldset>
 						<legend>Export</legend>
 						<button onclick="window.print()">🖨️ Print</button>
 						<button onclick="alert('Use browser screenshot tool or Print to PDF')">📷 Save Image</button>
@@ -557,6 +591,16 @@
 						document.body.classList.add('double-sided');
 					}
 				});
+			});
+			
+			// Bleed toggle
+			const bleedCheckbox = document.getElementById('enable-bleed');
+			bleedCheckbox.addEventListener('change', (e) => {
+				if (e.target.checked) {
+					document.body.classList.add('with-bleed');
+				} else {
+					document.body.classList.remove('with-bleed');
+				}
 			});
 		</script>
 	</body>
