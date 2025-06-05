@@ -13,8 +13,15 @@
 		<link rel="stylesheet" href="https://unpkg.com/xp.css" id="winxp-css" disabled />
 		
 		<style>
+			/* Default no bleed */
 			@page {
 				size: 3.5in 2in;
+				margin: 0;
+			}
+			
+			/* With bleed */
+			body.with-bleed @page {
+				size: 3.75in 2.25in; /* Added 0.125in bleed on all sides */
 				margin: 0;
 			}
 			
@@ -29,6 +36,7 @@
 				padding: 0;
 			}
 			
+			/* Default no bleed */
 			.card-container {
 				width: 3.5in;
 				height: 2in;
@@ -38,6 +46,17 @@
 				overflow: hidden;
 			}
 			
+			/* With bleed */
+			body.with-bleed .card-container {
+				width: 3.75in; /* Added 0.125in bleed on each side */
+				height: 2.25in; /* Added 0.125in bleed on each side */
+				background: #c0c0c0; /* Window background extends to bleed */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			
+			/* Default no bleed */
 			.window {
 				width: 100%;
 				height: 100%;
@@ -46,16 +65,24 @@
 				flex-direction: column;
 			}
 			
+			/* With bleed */
+			body.with-bleed .window {
+				width: calc(100% - 0.25in); /* Account for bleed */
+				height: calc(100% - 0.25in); /* Account for bleed */
+				background: #c0c0c0;
+				border: 2px solid;
+				border-color: #ffffff #808080 #808080 #ffffff;
+			}
+			
 			/* Slim title bar to save space */
 			.title-bar {
 				height: 20px;
 				padding: 2px;
-				margin-left: 2px;
-				margin-top: 2px;
-				margin-right: 2px;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				background: #000080;
+				color: white;
 			}
 			
 			.title-bar-text {
@@ -84,8 +111,8 @@
 			
 			.window-body {
 				flex-grow: 1;
-				padding: 8px;
-				padding-bottom: 0;
+				padding-left: 8px;
+				padding-right: 8px;
 				display: flex;
 				flex-direction: column;
 				font-size: 9px;
@@ -188,6 +215,15 @@
 				border-color: #0078d7;
 			}
 			
+			/* XP theme overrides for title bar */
+			body:has(#winxp:checked) .title-bar {
+				background: linear-gradient(to bottom, #0054e3, #0073ea);
+			}
+			
+			body:has(#winxp:checked) .window {
+				border-radius: 6px 6px 0 0;
+			}
+			
 			/* Formula badge container */
 			.formula-container {
 				display: flex;
@@ -220,7 +256,7 @@
 				font-size: 8px;
 				border-top: 1px solid #fff;
 				padding: 0 2px;
-				margin: 0 -8px;
+				margin: 0 -8px 2px -8px;
 			}
 			
 			.status-bar-field {
@@ -230,6 +266,7 @@
 				font-size: 11px;
 				margin-right: 2px;
 				flex-shrink: 0;
+				margin-bottom: 2px;
 			}
 			.status-bar-field-right {
 				margin-right: 0;
@@ -251,12 +288,18 @@
 			
 			/* QR positioning for single-sided */
 			.single-sided .qr-container {
-				top: 24px;
-				bottom: auto;
+				top: 22px;
 				right: 8px;
+				bottom: auto;
 				display: flex;
 				flex-direction: column;
 				align-items: flex-end;
+			}
+			
+			/* QR positioning adjustments for bleed */
+			body.with-bleed.single-sided .qr-container {
+				top: 36px ;
+				right: 22px ;
 			}
 			
 			.qr-small {
@@ -344,6 +387,7 @@
 				
 				.card-container {
 					box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+					position: relative;
 				}
 			}
 			
@@ -410,6 +454,12 @@
 						</label>
 						<label>
 							<input type="radio" name="theme" value="xp"> WinXP
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend>Print Options</legend>
+						<label>
+							<input type="checkbox" id="enable-bleed"> Add bleed (for professional printing)
 						</label>
 					</fieldset>
 					<fieldset>
@@ -541,6 +591,16 @@
 						document.body.classList.add('double-sided');
 					}
 				});
+			});
+			
+			// Bleed toggle
+			const bleedCheckbox = document.getElementById('enable-bleed');
+			bleedCheckbox.addEventListener('change', (e) => {
+				if (e.target.checked) {
+					document.body.classList.add('with-bleed');
+				} else {
+					document.body.classList.remove('with-bleed');
+				}
 			});
 		</script>
 	</body>
