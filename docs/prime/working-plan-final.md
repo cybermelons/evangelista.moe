@@ -2,72 +2,52 @@
 
 ## Project Overview
 
-Simple, honest portfolio site with terminal aesthetic. Shows Marc as an AI engineer who ships real products.
+Portfolio site with Windows 98/XP retro aesthetic. Shows Marc as an AI engineer who ships real products.
 
 ## Core Message
 
-"AI engineer who lives in the terminal" - straightforward, memorable, accurate.
+"AI engineer who makes computer do work" - straightforward, memorable, accurate.
 
-## Design
+## Current Implementation
 
 ### Visual Identity
-- **Color Scheme**: Terminal colors (green/amber text on black background)
-- **Typography**: Monospace throughout (Fira Code or similar)
-- **Layout**: Single page, minimal, fast
-- **Interactions**: Blinking cursor, subtle terminal effects
+- **Theme**: Windows 98/XP switchable theme
+- **Typography**: System fonts with retro Windows feel
+- **Layout**: Desktop metaphor with windows and dialogs
+- **Interactions**: Classic Windows UI patterns
 
 ### Content Structure
+- Properties window with tabs (General/Projects/Experience/System)
+- 60x performance metric prominently displayed
+- Skills grid with Windows 98 icons
+- Connect window with contact links
+- Quick Info sidebar with theme switcher
 
-```
-Marc Evangelista
----------------
-> AI engineer who lives in the terminal
-
-Currently building:
-• Lilaya - Personal development game with AI-powered pattern recognition
-• Music Practice Tracker - AI coaching for music students  
-• Custom LLM agents and RAG systems for various clients
-
-Previously:
-• Bloomberg - Systems engineering, database optimization
-• Toki - Blockchain loyalty systems
-
-I leverage AI to solve real problems. ADHD brain, terminal enthusiast,
-shipping actual products.
-
-$ contact --email marc@evangelista.moe
-$ ls --social github linkedin twitter
-
-[View GitHub] [Download Resume]
-```
-
-## Technical Requirements
+## Technical Implementation
 
 - Static site (Astro)
-- Single page
-- < 50KB total
-- No heavy JS
-- Terminal CSS effects only
+- Single page application
+- Windows 98.css and XP.css libraries
 - Mobile responsive
+- Interactive elements (tabs, theme switcher)
 
 ## What This Achieves
 
 1. Shows technical competence
-2. Demonstrates AI focus
-3. Proves you ship
-4. Memorable (terminal theme)
-5. Honest about WIP status
-6. Gets recruiters what they need
+2. Demonstrates AI focus (Claude workflows)
+3. Proves shipping ability (60x optimization)
+4. Memorable retro Windows theme
+5. Playful yet professional
+6. Gets recruiters needed information
 
-## Development Tasks
+## Status
 
-1. Set up Astro project
-2. Create terminal CSS theme
-3. Add content
-4. Deploy
-
-Total time: ~4-6 hours
+✅ Site fully implemented and deployed
+✅ Windows 98/XP theme switcher working
+✅ All content sections complete
+✅ Business card page added
+🔄 Ongoing: QR positioning refinements for business card
 
 ---
 
-Simple. Honest. Shippable.
+Ready for production use.
