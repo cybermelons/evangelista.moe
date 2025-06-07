@@ -1,0 +1,570 @@
+---
+
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARC ANTHONY EVANGELISTA - PILOT-01</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="Pilot designation: Marc Anthony Evangelista. Conscious navigation of changing realities through intentional development systems." />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.3;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Version switcher */
+        .version-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .version-switcher a {
+            color: #00ff00;
+            text-decoration: none;
+        }
+        
+        .version-switcher a:hover {
+            color: #fff;
+        }
+        
+        /* NGE Typography */
+        .title-card {
+            background: #000;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            border: 2px solid #fff;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: scan 3s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .compressed-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            font-size: clamp(2rem, 8vw, 6rem);
+            letter-spacing: -0.02em;
+            transform: scaleX(0.7);
+            line-height: 0.9;
+            margin: 20px 0;
+        }
+        
+        .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            font-size: clamp(0.8rem, 2vw, 1.2rem);
+            letter-spacing: 0.1em;
+            transform: scaleX(0.8);
+            opacity: 0.9;
+        }
+        
+        .status-block {
+            background: #111;
+            border-left: 4px solid #00ff00;
+            padding: 20px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .status-block::before {
+            content: attr(data-status);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #000;
+            color: #00ff00;
+            padding: 0 10px;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+        }
+        
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch1 2s infinite;
+            color: #ff0000;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch2 2s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+        
+        @keyframes glitch1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        
+        @keyframes glitch2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-2px, 2px); }
+            80% { transform: translate(-2px, -2px); }
+        }
+        
+        .terminal {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .terminal::after {
+            content: '█';
+            animation: blink 1s infinite;
+            color: #00ff00;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .hud-element {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #333;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff00, #ffff00, #ff0000);
+            animation: progress 3s ease-in-out infinite;
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 97%; }
+        }
+        
+        .classification {
+            color: #ff6600;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 10px;
+        }
+        
+        .monolith {
+            background: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 40px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            transform: scaleX(0.8);
+        }
+        
+        .flash-frame {
+            background: #fff;
+            color: #000;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            transform: scaleX(0.6);
+            margin: 20px 0;
+            animation: flash 0.1s ease-in-out;
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .japanese {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+        
+        .signal-lost {
+            background: #ff0000;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            animation: signal-glitch 0.3s infinite;
+        }
+        
+        @keyframes signal-glitch {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .nav-header {
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        
+        .nav-header h1 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            transform: scaleX(0.7);
+            margin-bottom: 5px;
+        }
+        
+        .nav-header .tagline {
+            font-size: 0.8rem;
+            color: #00ff00;
+            letter-spacing: 0.1em;
+        }
+        
+        .section {
+            margin: 60px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            background: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .contact-item a {
+            color: #00ff00;
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .contact-item a:hover {
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .version-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+            
+            .title-card {
+                padding: 30px 20px;
+                margin: 15px 0;
+            }
+            
+            .compressed-title {
+                font-size: clamp(1.5rem, 6vw, 4rem);
+            }
+            
+            .monolith {
+                padding: 40px 20px;
+                font-size: 1.2rem;
+            }
+            
+            .flash-frame {
+                font-size: 1.4rem;
+                padding: 15px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .section {
+                margin: 40px 0;
+            }
+            
+            .status-block, .terminal, .hud-element {
+                font-size: 0.75rem;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-header .tagline {
+                font-size: 0.7rem;
+            }
+            
+            .compressed-title {
+                font-size: clamp(1.2rem, 5vw, 3rem);
+            }
+            
+            .subtitle {
+                font-size: clamp(0.7rem, 1.5vw, 1rem);
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .title-card::before,
+            .glitch::before,
+            .glitch::after,
+            .terminal::after,
+            .progress-fill,
+            .signal-lost {
+                animation: none;
+            }
+            
+            .flash-frame {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Version Switcher -->
+    <div class="version-switcher">
+        <div class="classification">VERSION SELECT</div>
+        <a href="/">[ WINDOWS 98 ]</a>
+    </div>
+
+    <div class="container">
+        <header class="nav-header">
+            <h1>MARC ANTHONY EVANGELISTA</h1>
+            <div class="tagline">PILOT-01 / SOFTWARE ENGINEER</div>
+        </header>
+
+        <div class="title-card">
+            <div class="compressed-title">PILOT DESIGNATION</div>
+            <div class="subtitle">MARC ANTHONY EVANGELISTA</div>
+        </div>
+
+        <div class="status-block" data-status="SYSTEM STATUS">
+            CURRENT STATUS: <span class="glitch" data-text="SYNCHRONIZED">SYNCHRONIZED</span><br>
+            MISSION PARAMETERS: CONSCIOUS NAVIGATION OF CHANGING REALITIES<br>
+            SYNC RATIO: 97.3% AND ASCENDING
+        </div>
+
+        <div class="flash-frame">
+            MOST PEOPLE SLEEPWALK THROUGH LIFE
+        </div>
+
+        <section class="section">
+            <div class="classification">CLASSIFIED: PERSONAL DIRECTIVE</div>
+            <div class="terminal">
+> LOADING AWARENESS PROTOCOL...<br>
+> INITIALIZING SELF-KNOWLEDGE SYSTEMS...<br>
+> PILOT EVANGELISTA: ONLINE<br>
+<br>
+The world changed faster than anyone expected.<br>
+While others drift through uncertainty, I choose deliberate direction.<br>
+<br>
+Most people react to life instead of designing it.<br>
+I prefer manual control.<br>
+<br>
+> CONSCIOUSNESS.EXE RUNNING...
+            </div>
+        </section>
+
+        <div class="monolith">
+            WE ARE THE CAPTAINS<br>
+            OF OUR SHIP
+        </div>
+
+        <section class="section">
+            <div class="hud-element">
+                <div class="classification">CORE DIRECTIVE ANALYSIS</div>
+                <strong>MIND-BODY SYNCHRONIZATION:</strong>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                In a reality where machines optimize everything else,<br>
+                the final frontier is optimizing consciousness itself.<br>
+                <div class="japanese">意識の最適化 (Ishiki no saiteki-ka)</div>
+            </div>
+
+            <div class="hud-element">
+                <div class="classification">TECHNICAL CAPABILITIES</div>
+                <strong>OPERATIONAL SYSTEMS:</strong><br>
+                • Full-stack development expertise<br>
+                • Frontend: React/Next.js modern interfaces<br>
+                • Backend: Node.js/AWS scalable systems<br>
+                • Database: Efficient data management<br>
+                • AI Integration: Claude workflows & custom agents<br>
+                • Web3: Blockchain development experience
+            </div>
+        </section>
+
+        <div class="signal-lost">
+            SIGNAL LOST - BUFFERING NEW POSSIBILITIES
+        </div>
+
+        <section class="section">
+            <div class="title-card">
+                <div class="compressed-title">PROJECT: LILAYA</div>
+                <div class="subtitle">PERSONAL DEVELOPMENT PROTOCOL</div>
+            </div>
+
+            <div class="status-block" data-status="PROJECT CLASSIFICATION">
+                OBJECTIVE: PERSONAL DEVELOPMENT GAMIFICATION<br>
+                STATUS: IN DEVELOPMENT<br>
+                PURPOSE: MAKING SELF-IMPROVEMENT ACTUALLY WORK
+            </div>
+
+            <div class="terminal">
+> ANALYZING TRADITIONAL SELF-HELP APPROACHES...<br>
+> ERROR: MOTIVATION SYSTEMS UNSUSTAINABLE<br>
+> INITIATING LILAYA DEVELOPMENT SEQUENCE...<br>
+<br>
+Most self-improvement fails because it's boring and abstract.<br>
+Lilaya makes personal growth feel like leveling up in a game.<br>
+Not another productivity app. Not life hacking nonsense.<br>
+Actual behavior change through better feedback loops.<br>
+<br>
+BECAUSE: You can't improve what you can't measure.<br>
+<br>
+> LILAYA ALPHA BUILD: COMPILING...
+            </div>
+        </section>
+
+        <div class="flash-frame">
+            INTENTIONAL LIVING ACTIVATED
+        </div>
+
+        <section class="section">
+            <div class="hud-element">
+                <div class="classification">FINAL SYNCHRONIZATION SEQUENCE</div>
+                <strong>MISSION STATUS: ACTIVE</strong><br><br>
+                While others get overwhelmed by endless possibilities, I build systems.<br>
+                While others chase the latest trends, I focus on fundamentals.<br><br>
+                The future belongs to people who can navigate uncertainty<br>
+                with clear intention and practical tools.<br><br>
+                <strong>EVANGELISTA UNIT: ONLINE</strong><br>
+                <strong>SYNC RATIO: ASCENDING</strong><br>
+                <strong>MISSION STATUS: <span class="glitch" data-text="ACTIVE">ACTIVE</span></strong>
+            </div>
+        </section>
+
+        <div class="monolith">
+            INTENTIONAL<br>
+            DEVELOPMENT<br>
+            SYSTEMS
+        </div>
+
+        <section class="section">
+            <div class="classification">CONTACT PROTOCOLS</div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="classification">EMAIL TRANSMISSION</div>
+                    <a href="mailto:marc@evangelista.moe">marc@evangelista.moe</a>
+                </div>
+                <div class="contact-item">
+                    <div class="classification">GITHUB REPOSITORY</div>
+                    <a href="https://github.com/cybermelons" target="_blank">cybermelons</a>
+                </div>
+                <div class="contact-item">
+                    <div class="classification">BUSINESS CARD</div>
+                    <a href="/business-card">business-card</a>
+                </div>
+                <div class="contact-item">
+                    <div class="classification">LINKEDIN NETWORK</div>
+                    <a href="https://linkedin.com/in/neon-genesis-evangelista" target="_blank">neon-genesis-evangelista</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="terminal">
+> EVANGELISTA CONSCIOUSNESS PROTOCOL: COMPLETE<br>
+> AWAITING NEXT DIRECTIVE...<br>
+> CONNECTION MAINTAINED
+        </div>
+    </div>
+</body>
+</html>
